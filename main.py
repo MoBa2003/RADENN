@@ -8,13 +8,8 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
-if (number > 0) {
-print("Positive number")
-} elif (number < 0) {
-print("Negative number")
-} else {
-print("Zero")
-}
+var a = 1
+print(a+2)
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -31,11 +26,10 @@ draw_tree(custom_tree_root)
 
 
 
-# def statements(node:TreeNode):
-#     node_elements=[]
-#     for items in node.children:
-#         node_elements.append(statement(items))
+def statements(node:TreeNode):
+    node_elements=[]
+    for items in node.children:
+        node_elements.append(statement(items))
         
-# def statement(node:TreeNode):
-    
-    
+def statement(node:TreeNode):
+     

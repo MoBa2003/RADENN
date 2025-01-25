@@ -102,17 +102,14 @@ networkExpr
 
 ifExpr
     : 'if' expr (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND) (elifExpr | elseExpr)?)
-    | 'if' expr LROUND NEWLINE* statements NEWLINE* RROUND (elifExpr | elseExpr)?
     ;
 
 elifExpr
     : 'elif' expr (NEWLINE* (statement |LROUND NEWLINE* statements NEWLINE* RROUND) (elifExpr | elseExpr)?)
-    | 'elif' expr LROUND NEWLINE* statements NEWLINE* RROUND (elifExpr | elseExpr)?
     ;
 
 elseExpr
     : 'else' (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND))
-    | 'else' LROUND NEWLINE* statements NEWLINE* RROUND
     ;
 
 
