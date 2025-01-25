@@ -247,6 +247,16 @@ public interface RADENNListener extends ParseTreeListener {
 	 */
 	void exitElseExpr(RADENNParser.ElseExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link RADENNParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock(RADENNParser.BlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RADENNParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock(RADENNParser.BlockContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link RADENNParser#forExpr}.
 	 * @param ctx the parse tree
 	 */

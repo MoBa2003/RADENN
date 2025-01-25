@@ -101,38 +101,35 @@ networkExpr
     ;
 
 ifExpr
-    : 'if' expr (NEWLINE* (statement | block) (elifExpr | elseExpr)?)
-    | 'if' expr block (elifExpr | elseExpr)?
+    : 'if' expr (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND) (elifExpr | elseExpr)?)
+    | 'if' expr LROUND NEWLINE* statements NEWLINE* RROUND (elifExpr | elseExpr)?
     ;
 
 elifExpr
-    : 'elif' expr (NEWLINE* (statement | block) (elifExpr | elseExpr)?)
-    | 'elif' expr block (elifExpr | elseExpr)?
+    : 'elif' expr (NEWLINE* (statement |LROUND NEWLINE* statements NEWLINE* RROUND) (elifExpr | elseExpr)?)
+    | 'elif' expr LROUND NEWLINE* statements NEWLINE* RROUND (elifExpr | elseExpr)?
     ;
 
 elseExpr
-    : 'else' (NEWLINE* (statement | block))
-    | 'else' block
+    : 'else' (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND))
+    | 'else' LROUND NEWLINE* statements NEWLINE* RROUND
     ;
 
-block
-    : LROUND NEWLINE* statements NEWLINE* RROUND
-    ;
 
 forExpr
-    : 'for' LPAREN IDENTIFIER COMMA expr COMMA expr (COMMA expr)? RPAREN (NEWLINE* (statement | block))
+    : 'for' LPAREN IDENTIFIER COMMA expr COMMA expr (COMMA expr)? RPAREN (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND))
     ;
 
 whileExpr
-    : 'while' expr (NEWLINE* (statement | block))
+    : 'while' expr (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND))
     ;
 
 doWhileExpr
-    : 'do' (NEWLINE* (statement | block)) 'while' expr
+    : 'do' (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND)) 'while' expr
     ;
 
 funcDef
-    : 'function' IDENTIFIER? LPAREN (IDENTIFIER (COMMA IDENTIFIER)*)? RPAREN (NEWLINE* (statement | block))
+    : 'function' IDENTIFIER? LPAREN (IDENTIFIER (COMMA IDENTIFIER)*)? RPAREN (NEWLINE* (statement | LROUND NEWLINE* statements NEWLINE* RROUND))
     ;
 
 INT: [0-9]+;
@@ -170,7 +167,7 @@ LROUND: '{';
 RROUND: '}';
 
 NEWLINE: '\r'? '\n';
-WS: [ \r\t\n]+ -> skip;
+WS: [ \r\t]+ -> skip;
 
 // Single-line comments
 COMMENT: '#' ~[\r\n]* -> skip;
