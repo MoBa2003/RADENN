@@ -1,4 +1,4 @@
-# Generated from D:/5th_Semester_Concepts/Compiler_Design/Project/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.2
+# Generated from C:/Users/ASUS/iman/elmos/fifth semester/Compiler/finalproject/us/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .RADENNParser import RADENNParser
@@ -8,6 +8,11 @@ else:
 # This class defines a complete generic visitor for a parse tree produced by RADENNParser.
 
 class RADENNVisitor(ParseTreeVisitor):
+
+    # Visit a parse tree produced by RADENNParser#start.
+    def visitStart(self, ctx:RADENNParser.StartContext):
+        return self.visitChildren(ctx)
+
 
     # Visit a parse tree produced by RADENNParser#program.
     def visitProgram(self, ctx:RADENNParser.ProgramContext):
@@ -19,43 +24,18 @@ class RADENNVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by RADENNParser#returnStatement.
-    def visitReturnStatement(self, ctx:RADENNParser.ReturnStatementContext):
+    # Visit a parse tree produced by RADENNParser#statement.
+    def visitStatement(self, ctx:RADENNParser.StatementContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by RADENNParser#continueStatement.
-    def visitContinueStatement(self, ctx:RADENNParser.ContinueStatementContext):
+    # Visit a parse tree produced by RADENNParser#expr.
+    def visitExpr(self, ctx:RADENNParser.ExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by RADENNParser#breakStatement.
-    def visitBreakStatement(self, ctx:RADENNParser.BreakStatementContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#exprStatement.
-    def visitExprStatement(self, ctx:RADENNParser.ExprStatementContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#varAssignment.
-    def visitVarAssignment(self, ctx:RADENNParser.VarAssignmentContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#logicalExpr.
-    def visitLogicalExpr(self, ctx:RADENNParser.LogicalExprContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#notExpr.
-    def visitNotExpr(self, ctx:RADENNParser.NotExprContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#comparisonExpr.
-    def visitComparisonExpr(self, ctx:RADENNParser.ComparisonExprContext):
+    # Visit a parse tree produced by RADENNParser#compExpr.
+    def visitCompExpr(self, ctx:RADENNParser.CompExprContext):
         return self.visitChildren(ctx)
 
 
@@ -84,93 +64,8 @@ class RADENNVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by RADENNParser#intAtom.
-    def visitIntAtom(self, ctx:RADENNParser.IntAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#floatAtom.
-    def visitFloatAtom(self, ctx:RADENNParser.FloatAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#stringAtom.
-    def visitStringAtom(self, ctx:RADENNParser.StringAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#identifierAtom.
-    def visitIdentifierAtom(self, ctx:RADENNParser.IdentifierAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#parenExpr.
-    def visitParenExpr(self, ctx:RADENNParser.ParenExprContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#listAtom.
-    def visitListAtom(self, ctx:RADENNParser.ListAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#matrixAtom.
-    def visitMatrixAtom(self, ctx:RADENNParser.MatrixAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#datasetAtom.
-    def visitDatasetAtom(self, ctx:RADENNParser.DatasetAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#optimizerAtom.
-    def visitOptimizerAtom(self, ctx:RADENNParser.OptimizerAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#inputLayerAtom.
-    def visitInputLayerAtom(self, ctx:RADENNParser.InputLayerAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#hiddenLayerAtom.
-    def visitHiddenLayerAtom(self, ctx:RADENNParser.HiddenLayerAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#outputLayerAtom.
-    def visitOutputLayerAtom(self, ctx:RADENNParser.OutputLayerAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#networkAtom.
-    def visitNetworkAtom(self, ctx:RADENNParser.NetworkAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#ifAtom.
-    def visitIfAtom(self, ctx:RADENNParser.IfAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#forAtom.
-    def visitForAtom(self, ctx:RADENNParser.ForAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#whileAtom.
-    def visitWhileAtom(self, ctx:RADENNParser.WhileAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#doWhileAtom.
-    def visitDoWhileAtom(self, ctx:RADENNParser.DoWhileAtomContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by RADENNParser#funcDefAtom.
-    def visitFuncDefAtom(self, ctx:RADENNParser.FuncDefAtomContext):
+    # Visit a parse tree produced by RADENNParser#atom.
+    def visitAtom(self, ctx:RADENNParser.AtomContext):
         return self.visitChildren(ctx)
 
 

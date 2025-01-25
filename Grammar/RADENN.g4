@@ -1,28 +1,25 @@
 grammar RADENN;
 
-program
-    : statements EOF
-    ;
+start: program EOF;
+program: statements;
 
-statements
-    : NEWLINE* statement (NEWLINE+ statement)* NEWLINE*
-    ;
+statements: (NEWLINE | SEMICOLON)* statement ((NEWLINE | SEMICOLON)+ statement)* (NEWLINE | SEMICOLON)*;
 
 statement
-    : 'return' expr?  #returnStatement
-    | 'continue'      #continueStatement
-    | 'break'         #breakStatement
-    | expr           #exprStatement
+    : 'return' expr?
+    | 'continue'
+    | 'break'
+    | expr
     ;
 
 expr
-    : 'var' IDENTIFIER '=' expr                    #varAssignment
-    | compExpr (('and' | 'or') compExpr)*         #logicalExpr
+    : 'var' IDENTIFIER EQ expr
+    | compExpr (('and' | 'or') compExpr)*
     ;
 
 compExpr
-    : 'not' compExpr                              #notExpr
-    | arithExpr ((EE|NE|LT|GT|LTE|GTE) arithExpr)* #comparisonExpr
+    : 'not' compExpr
+    | arithExpr ((EE | NE | LT | GT | LTE | GTE) arithExpr)*
     ;
 
 arithExpr
@@ -34,7 +31,7 @@ term
     ;
 
 factor
-    : (PLUS|MINUS) factor
+    : (PLUS | MINUS) factor
     | power
     ;
 
@@ -47,24 +44,24 @@ call
     ;
 
 atom
-    : INT                                         #intAtom
-    | FLOAT                                       #floatAtom
-    | STRING                                      #stringAtom
-    | IDENTIFIER                                  #identifierAtom
-    | LPAREN expr RPAREN                         #parenExpr
-    | listExpr                                   #listAtom
-    | matExpr                                    #matrixAtom
-    | datasetExpr                                #datasetAtom
-    | optimizerExpr                              #optimizerAtom
-    | inputLayerExpr                             #inputLayerAtom
-    | hiddenLayerExpr                            #hiddenLayerAtom
-    | outputLayerExpr                            #outputLayerAtom
-    | networkExpr                                #networkAtom
-    | ifExpr                                     #ifAtom
-    | forExpr                                    #forAtom
-    | whileExpr                                  #whileAtom
-    | doWhileExpr                                #doWhileAtom
-    | funcDef                                    #funcDefAtom
+    : INT
+    | FLOAT
+    | STR
+    | IDENTIFIER
+    | LPAREN expr RPAREN
+    | listExpr
+    | matExpr
+    | datasetExpr
+    | optimizerExpr
+    | inputLayerExpr
+    | hiddenLayerExpr
+    | outputLayerExpr
+    | networkExpr
+    | ifExpr
+    | forExpr
+    | whileExpr
+    | doWhileExpr
+    | funcDef
     ;
 
 listExpr
@@ -88,11 +85,11 @@ optimizerExpr
     ;
 
 inputLayerExpr
-    : 'inputLayer' LPAREN expr (COMMA expr){5} RPAREN
+    : 'inputLayer' LPAREN expr COMMA expr COMMA expr COMMA expr COMMA expr COMMA expr RPAREN
     ;
 
 hiddenLayerExpr
-    : 'hiddenLayer' LPAREN expr (COMMA expr){4} RPAREN
+    : 'hiddenLayer' LPAREN expr COMMA expr COMMA expr COMMA expr COMMA expr RPAREN
     ;
 
 outputLayerExpr
@@ -104,59 +101,55 @@ networkExpr
     ;
 
 ifExpr
-    : 'if' expr (
-        (NEWLINE* statement (elifExpr | elseExpr)?) |
-        (LROUND NEWLINE statements (RROUND | elifExpr | elseExpr))
-    )
+    : 'if' expr (NEWLINE* (statement | block) (elifExpr | elseExpr)?)
+    | 'if' expr block (elifExpr | elseExpr)?
     ;
 
 elifExpr
-    : 'elif' expr (
-        (NEWLINE* statement (elifExpr | elseExpr)?) |
-        (LROUND NEWLINE statements (RROUND | elifExpr | elseExpr))
-    )
+    : 'elif' expr (NEWLINE* (statement | block) (elifExpr | elseExpr)?)
+    | 'elif' expr block (elifExpr | elseExpr)?
     ;
 
 elseExpr
-    : 'else' (
-        NEWLINE* statement |
-        (LROUND NEWLINE statements RROUND)
-    )
+    : 'else' (NEWLINE* (statement | block))
+    | 'else' block
+    ;
+
+block
+    : LROUND NEWLINE* statements NEWLINE* RROUND
     ;
 
 forExpr
-    : 'for' LPAREN IDENTIFIER COMMA expr COMMA expr (COMMA expr)? RPAREN 
-      (NEWLINE* statement | (LROUND statements RROUND))
+    : 'for' LPAREN IDENTIFIER COMMA expr COMMA expr (COMMA expr)? RPAREN (NEWLINE* (statement | block))
     ;
 
 whileExpr
-    : 'while' expr (NEWLINE* statement | (LROUND statements RROUND))
+    : 'while' expr (NEWLINE* (statement | block))
     ;
 
 doWhileExpr
-    : 'do' (NEWLINE* statement NEWLINE* | (LROUND statements RROUND)) 'while' expr
+    : 'do' (NEWLINE* (statement | block)) 'while' expr
     ;
 
 funcDef
-    : 'function' IDENTIFIER? LPAREN (IDENTIFIER (COMMA IDENTIFIER)*)? RPAREN 
-      (NEWLINE* statement | (LROUND statements RROUND))
+    : 'function' IDENTIFIER? LPAREN (IDENTIFIER (COMMA IDENTIFIER)*)? RPAREN (NEWLINE* (statement | block))
     ;
 
-// Lexer Rules
+INT: [0-9]+;
+FLOAT: [0-9]+ '.' [0-9]+;
+STR: '"' .*? '"';
+IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]*;
+
+NOT: 'not';
+
+EQ: '=';
 PLUS: '+';
 MINUS: '-';
 MUL: '*';
 DIV: '/';
 MOD: '%';
 POW: '^';
-EQ: '=';
-LPAREN: '(';
-RPAREN: ')';
-LSQUARE: '[';
-RSQUARE: ']';
-LROUND: '{';
-RROUND: '}';
-COMMA: ',';
+
 EE: '==';
 NE: '!=';
 LT: '<';
@@ -164,17 +157,20 @@ GT: '>';
 LTE: '<=';
 GTE: '>=';
 
-IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]*;
-INT: [0-9]+;
-FLOAT: [0-9]+ '.' [0-9]*;
-STRING: '"' (~["\r\n] | '\\"')* '"';
-NEWLINE: [\r\n]+;
+AND: 'and';
+OR: 'or';
+
+COMMA: ',';
+SEMICOLON: ';';
+LPAREN: '(';
+RPAREN: ')';
+LSQUARE: '[';
+RSQUARE: ']';
+LROUND: '{';
+RROUND: '}';
+
+NEWLINE: '\r'? '\n';
 WS: [ \t]+ -> skip;
 
-// Skip comments
-COMMENT: '//' ~[\r\n]* -> skip;
-MULTILINE_COMMENT: '/*' .*? '*/' -> skip;
-
-
-// by claude
-// https://claude.ai/chat/f72f0ea0-3a87-4984-8135-b16ce0154726
+// Single-line comments
+COMMENT: '#' ~[\r\n]* -> skip;

@@ -1,4 +1,4 @@
-# Generated from D:/5th_Semester_Concepts/Compiler_Design/Project/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.2
+# Generated from C:/Users/ASUS/iman/elmos/fifth semester/Compiler/finalproject/us/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .RADENNParser import RADENNParser
@@ -7,6 +7,15 @@ else:
 
 # This class defines a complete listener for a parse tree produced by RADENNParser.
 class RADENNListener(ParseTreeListener):
+
+    # Enter a parse tree produced by RADENNParser#start.
+    def enterStart(self, ctx:RADENNParser.StartContext):
+        pass
+
+    # Exit a parse tree produced by RADENNParser#start.
+    def exitStart(self, ctx:RADENNParser.StartContext):
+        pass
+
 
     # Enter a parse tree produced by RADENNParser#program.
     def enterProgram(self, ctx:RADENNParser.ProgramContext):
@@ -26,75 +35,30 @@ class RADENNListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by RADENNParser#returnStatement.
-    def enterReturnStatement(self, ctx:RADENNParser.ReturnStatementContext):
+    # Enter a parse tree produced by RADENNParser#statement.
+    def enterStatement(self, ctx:RADENNParser.StatementContext):
         pass
 
-    # Exit a parse tree produced by RADENNParser#returnStatement.
-    def exitReturnStatement(self, ctx:RADENNParser.ReturnStatementContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#continueStatement.
-    def enterContinueStatement(self, ctx:RADENNParser.ContinueStatementContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#continueStatement.
-    def exitContinueStatement(self, ctx:RADENNParser.ContinueStatementContext):
+    # Exit a parse tree produced by RADENNParser#statement.
+    def exitStatement(self, ctx:RADENNParser.StatementContext):
         pass
 
 
-    # Enter a parse tree produced by RADENNParser#breakStatement.
-    def enterBreakStatement(self, ctx:RADENNParser.BreakStatementContext):
+    # Enter a parse tree produced by RADENNParser#expr.
+    def enterExpr(self, ctx:RADENNParser.ExprContext):
         pass
 
-    # Exit a parse tree produced by RADENNParser#breakStatement.
-    def exitBreakStatement(self, ctx:RADENNParser.BreakStatementContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#exprStatement.
-    def enterExprStatement(self, ctx:RADENNParser.ExprStatementContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#exprStatement.
-    def exitExprStatement(self, ctx:RADENNParser.ExprStatementContext):
+    # Exit a parse tree produced by RADENNParser#expr.
+    def exitExpr(self, ctx:RADENNParser.ExprContext):
         pass
 
 
-    # Enter a parse tree produced by RADENNParser#varAssignment.
-    def enterVarAssignment(self, ctx:RADENNParser.VarAssignmentContext):
+    # Enter a parse tree produced by RADENNParser#compExpr.
+    def enterCompExpr(self, ctx:RADENNParser.CompExprContext):
         pass
 
-    # Exit a parse tree produced by RADENNParser#varAssignment.
-    def exitVarAssignment(self, ctx:RADENNParser.VarAssignmentContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#logicalExpr.
-    def enterLogicalExpr(self, ctx:RADENNParser.LogicalExprContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#logicalExpr.
-    def exitLogicalExpr(self, ctx:RADENNParser.LogicalExprContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#notExpr.
-    def enterNotExpr(self, ctx:RADENNParser.NotExprContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#notExpr.
-    def exitNotExpr(self, ctx:RADENNParser.NotExprContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#comparisonExpr.
-    def enterComparisonExpr(self, ctx:RADENNParser.ComparisonExprContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#comparisonExpr.
-    def exitComparisonExpr(self, ctx:RADENNParser.ComparisonExprContext):
+    # Exit a parse tree produced by RADENNParser#compExpr.
+    def exitCompExpr(self, ctx:RADENNParser.CompExprContext):
         pass
 
 
@@ -143,165 +107,12 @@ class RADENNListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by RADENNParser#intAtom.
-    def enterIntAtom(self, ctx:RADENNParser.IntAtomContext):
+    # Enter a parse tree produced by RADENNParser#atom.
+    def enterAtom(self, ctx:RADENNParser.AtomContext):
         pass
 
-    # Exit a parse tree produced by RADENNParser#intAtom.
-    def exitIntAtom(self, ctx:RADENNParser.IntAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#floatAtom.
-    def enterFloatAtom(self, ctx:RADENNParser.FloatAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#floatAtom.
-    def exitFloatAtom(self, ctx:RADENNParser.FloatAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#stringAtom.
-    def enterStringAtom(self, ctx:RADENNParser.StringAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#stringAtom.
-    def exitStringAtom(self, ctx:RADENNParser.StringAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#identifierAtom.
-    def enterIdentifierAtom(self, ctx:RADENNParser.IdentifierAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#identifierAtom.
-    def exitIdentifierAtom(self, ctx:RADENNParser.IdentifierAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#parenExpr.
-    def enterParenExpr(self, ctx:RADENNParser.ParenExprContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#parenExpr.
-    def exitParenExpr(self, ctx:RADENNParser.ParenExprContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#listAtom.
-    def enterListAtom(self, ctx:RADENNParser.ListAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#listAtom.
-    def exitListAtom(self, ctx:RADENNParser.ListAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#matrixAtom.
-    def enterMatrixAtom(self, ctx:RADENNParser.MatrixAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#matrixAtom.
-    def exitMatrixAtom(self, ctx:RADENNParser.MatrixAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#datasetAtom.
-    def enterDatasetAtom(self, ctx:RADENNParser.DatasetAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#datasetAtom.
-    def exitDatasetAtom(self, ctx:RADENNParser.DatasetAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#optimizerAtom.
-    def enterOptimizerAtom(self, ctx:RADENNParser.OptimizerAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#optimizerAtom.
-    def exitOptimizerAtom(self, ctx:RADENNParser.OptimizerAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#inputLayerAtom.
-    def enterInputLayerAtom(self, ctx:RADENNParser.InputLayerAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#inputLayerAtom.
-    def exitInputLayerAtom(self, ctx:RADENNParser.InputLayerAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#hiddenLayerAtom.
-    def enterHiddenLayerAtom(self, ctx:RADENNParser.HiddenLayerAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#hiddenLayerAtom.
-    def exitHiddenLayerAtom(self, ctx:RADENNParser.HiddenLayerAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#outputLayerAtom.
-    def enterOutputLayerAtom(self, ctx:RADENNParser.OutputLayerAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#outputLayerAtom.
-    def exitOutputLayerAtom(self, ctx:RADENNParser.OutputLayerAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#networkAtom.
-    def enterNetworkAtom(self, ctx:RADENNParser.NetworkAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#networkAtom.
-    def exitNetworkAtom(self, ctx:RADENNParser.NetworkAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#ifAtom.
-    def enterIfAtom(self, ctx:RADENNParser.IfAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#ifAtom.
-    def exitIfAtom(self, ctx:RADENNParser.IfAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#forAtom.
-    def enterForAtom(self, ctx:RADENNParser.ForAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#forAtom.
-    def exitForAtom(self, ctx:RADENNParser.ForAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#whileAtom.
-    def enterWhileAtom(self, ctx:RADENNParser.WhileAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#whileAtom.
-    def exitWhileAtom(self, ctx:RADENNParser.WhileAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#doWhileAtom.
-    def enterDoWhileAtom(self, ctx:RADENNParser.DoWhileAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#doWhileAtom.
-    def exitDoWhileAtom(self, ctx:RADENNParser.DoWhileAtomContext):
-        pass
-
-
-    # Enter a parse tree produced by RADENNParser#funcDefAtom.
-    def enterFuncDefAtom(self, ctx:RADENNParser.FuncDefAtomContext):
-        pass
-
-    # Exit a parse tree produced by RADENNParser#funcDefAtom.
-    def exitFuncDefAtom(self, ctx:RADENNParser.FuncDefAtomContext):
+    # Exit a parse tree produced by RADENNParser#atom.
+    def exitAtom(self, ctx:RADENNParser.AtomContext):
         pass
 
 

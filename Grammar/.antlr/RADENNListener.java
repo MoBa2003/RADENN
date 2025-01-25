@@ -1,4 +1,4 @@
-// Generated from d:/5th_Semester_Concepts/Compiler_Design/Project/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
+// Generated from c:/Users/ASUS/iman/elmos/fifth semester/Compiler/finalproject/us/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -6,6 +6,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link RADENNParser}.
  */
 public interface RADENNListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link RADENNParser#start}.
+	 * @param ctx the parse tree
+	 */
+	void enterStart(RADENNParser.StartContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RADENNParser#start}.
+	 * @param ctx the parse tree
+	 */
+	void exitStart(RADENNParser.StartContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RADENNParser#program}.
 	 * @param ctx the parse tree
@@ -27,101 +37,35 @@ public interface RADENNListener extends ParseTreeListener {
 	 */
 	void exitStatements(RADENNParser.StatementsContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code returnStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
+	 * Enter a parse tree produced by {@link RADENNParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterReturnStatement(RADENNParser.ReturnStatementContext ctx);
+	void enterStatement(RADENNParser.StatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code returnStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
+	 * Exit a parse tree produced by {@link RADENNParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitReturnStatement(RADENNParser.ReturnStatementContext ctx);
+	void exitStatement(RADENNParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code continueStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
+	 * Enter a parse tree produced by {@link RADENNParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterContinueStatement(RADENNParser.ContinueStatementContext ctx);
+	void enterExpr(RADENNParser.ExprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code continueStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
+	 * Exit a parse tree produced by {@link RADENNParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitContinueStatement(RADENNParser.ContinueStatementContext ctx);
+	void exitExpr(RADENNParser.ExprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code breakStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
+	 * Enter a parse tree produced by {@link RADENNParser#compExpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterBreakStatement(RADENNParser.BreakStatementContext ctx);
+	void enterCompExpr(RADENNParser.CompExprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code breakStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
+	 * Exit a parse tree produced by {@link RADENNParser#compExpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitBreakStatement(RADENNParser.BreakStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code exprStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterExprStatement(RADENNParser.ExprStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code exprStatement}
-	 * labeled alternative in {@link RADENNParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitExprStatement(RADENNParser.ExprStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code varAssignment}
-	 * labeled alternative in {@link RADENNParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterVarAssignment(RADENNParser.VarAssignmentContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code varAssignment}
-	 * labeled alternative in {@link RADENNParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitVarAssignment(RADENNParser.VarAssignmentContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code logicalExpr}
-	 * labeled alternative in {@link RADENNParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterLogicalExpr(RADENNParser.LogicalExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code logicalExpr}
-	 * labeled alternative in {@link RADENNParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitLogicalExpr(RADENNParser.LogicalExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code notExpr}
-	 * labeled alternative in {@link RADENNParser#compExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNotExpr(RADENNParser.NotExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code notExpr}
-	 * labeled alternative in {@link RADENNParser#compExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNotExpr(RADENNParser.NotExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code comparisonExpr}
-	 * labeled alternative in {@link RADENNParser#compExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterComparisonExpr(RADENNParser.ComparisonExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code comparisonExpr}
-	 * labeled alternative in {@link RADENNParser#compExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitComparisonExpr(RADENNParser.ComparisonExprContext ctx);
+	void exitCompExpr(RADENNParser.CompExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RADENNParser#arithExpr}.
 	 * @param ctx the parse tree
@@ -173,221 +117,15 @@ public interface RADENNListener extends ParseTreeListener {
 	 */
 	void exitCall(RADENNParser.CallContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code intAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
+	 * Enter a parse tree produced by {@link RADENNParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterIntAtom(RADENNParser.IntAtomContext ctx);
+	void enterAtom(RADENNParser.AtomContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code intAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
+	 * Exit a parse tree produced by {@link RADENNParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitIntAtom(RADENNParser.IntAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code floatAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatAtom(RADENNParser.FloatAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code floatAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatAtom(RADENNParser.FloatAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stringAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterStringAtom(RADENNParser.StringAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stringAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitStringAtom(RADENNParser.StringAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code identifierAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifierAtom(RADENNParser.IdentifierAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code identifierAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifierAtom(RADENNParser.IdentifierAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenExpr}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenExpr(RADENNParser.ParenExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenExpr}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenExpr(RADENNParser.ParenExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code listAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterListAtom(RADENNParser.ListAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code listAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitListAtom(RADENNParser.ListAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code matrixAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterMatrixAtom(RADENNParser.MatrixAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code matrixAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitMatrixAtom(RADENNParser.MatrixAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code datasetAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterDatasetAtom(RADENNParser.DatasetAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code datasetAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitDatasetAtom(RADENNParser.DatasetAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code optimizerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterOptimizerAtom(RADENNParser.OptimizerAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code optimizerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitOptimizerAtom(RADENNParser.OptimizerAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code inputLayerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterInputLayerAtom(RADENNParser.InputLayerAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code inputLayerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitInputLayerAtom(RADENNParser.InputLayerAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code hiddenLayerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterHiddenLayerAtom(RADENNParser.HiddenLayerAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code hiddenLayerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitHiddenLayerAtom(RADENNParser.HiddenLayerAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code outputLayerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterOutputLayerAtom(RADENNParser.OutputLayerAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code outputLayerAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitOutputLayerAtom(RADENNParser.OutputLayerAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code networkAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterNetworkAtom(RADENNParser.NetworkAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code networkAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitNetworkAtom(RADENNParser.NetworkAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ifAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterIfAtom(RADENNParser.IfAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ifAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitIfAtom(RADENNParser.IfAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code forAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterForAtom(RADENNParser.ForAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code forAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitForAtom(RADENNParser.ForAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code whileAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterWhileAtom(RADENNParser.WhileAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code whileAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitWhileAtom(RADENNParser.WhileAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code doWhileAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterDoWhileAtom(RADENNParser.DoWhileAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code doWhileAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitDoWhileAtom(RADENNParser.DoWhileAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code funcDefAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuncDefAtom(RADENNParser.FuncDefAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code funcDefAtom}
-	 * labeled alternative in {@link RADENNParser#atom}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuncDefAtom(RADENNParser.FuncDefAtomContext ctx);
+	void exitAtom(RADENNParser.AtomContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RADENNParser#listExpr}.
 	 * @param ctx the parse tree
