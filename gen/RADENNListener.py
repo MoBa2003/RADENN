@@ -1,4 +1,4 @@
-# Generated from C:/Users/ASUS/iman/elmos/fifth semester/Compiler/finalproject/us/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
+# Generated from C:/Users/esikh/term5/compiler/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .RADENNParser import RADENNParser
@@ -221,6 +221,15 @@ class RADENNListener(ParseTreeListener):
 
     # Exit a parse tree produced by RADENNParser#elseExpr.
     def exitElseExpr(self, ctx:RADENNParser.ElseExprContext):
+        pass
+
+
+    # Enter a parse tree produced by RADENNParser#block.
+    def enterBlock(self, ctx:RADENNParser.BlockContext):
+        pass
+
+    # Exit a parse tree produced by RADENNParser#block.
+    def exitBlock(self, ctx:RADENNParser.BlockContext):
         pass
 
 

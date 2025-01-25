@@ -93,7 +93,7 @@ hiddenLayerExpr
     ;
 
 outputLayerExpr
-    : 'outputLayer' LPAREN expr COMMA expr RPAREN
+    : 'outputLayer' LPAREN expr COMMA expr COMMA expr RPAREN
     ;
 
 networkExpr

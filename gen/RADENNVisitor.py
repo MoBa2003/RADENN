@@ -1,4 +1,4 @@
-# Generated from C:/Users/ASUS/iman/elmos/fifth semester/Compiler/finalproject/us/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
+# Generated from C:/Users/esikh/term5/compiler/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .RADENNParser import RADENNParser
@@ -126,6 +126,11 @@ class RADENNVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by RADENNParser#elseExpr.
     def visitElseExpr(self, ctx:RADENNParser.ElseExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RADENNParser#block.
+    def visitBlock(self, ctx:RADENNParser.BlockContext):
         return self.visitChildren(ctx)
 
 
