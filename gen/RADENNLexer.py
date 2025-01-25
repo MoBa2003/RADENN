@@ -1,4 +1,4 @@
-# Generated from C:/Users/esikh/term5/compiler/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
+# Generated from C:/Users/ASUS/iman/elmos/fifth semester/Compiler/finalproject/us/RADENN/Grammar/RADENN.g4 by ANTLR 4.13.1
 from antlr4 import *
 from io import StringIO
 import sys

@@ -170,7 +170,7 @@ LROUND: '{';
 RROUND: '}';
 
 NEWLINE: '\r'? '\n';
-WS: [ \t]+ -> skip;
+WS: [ \r\t\n]+ -> skip;
 
 // Single-line comments
 COMMENT: '#' ~[\r\n]* -> skip;
