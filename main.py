@@ -9,7 +9,7 @@ from Code.radenn_nodes import *
 
 input_stream=InputStream("""
 
-var x=[]
+[1,1,"hello"]
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -58,6 +58,7 @@ def bin_op_compExpr_compExpr(cur_childs:List[TreeNode]):
 
 
 def expr(node:TreeNode):
+    # print(node)
     if node.children[0].val=='var':
         return VarAssignNode(node.children[1].val,expr(node.children[3]))
     if len(node.children)==1:
@@ -149,7 +150,8 @@ def listExpr(node:TreeNode):
     if len(node.children)==2:
         return ListNode([])
     items=[]
-    for i in range(1,len(node.children)+1):
+    for i in range(1,len(node.children)-1):
+        # print(node.children[i])
         items.append(expr(node.children[i]))
     return ListNode(items)
     

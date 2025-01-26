@@ -7,8 +7,8 @@ mp = {21: "INT", 22: "FLOAT", 23: "STR", 24: "IDENTIFIER"}
 
 def build_custom_tree(node, parent_val=None):
     # Preserve '(' and ')' when the parent node is 'call'
-    if node.getText() in "()":
-        if parent_val.lower() == "call":
+    if node.getText() in "()[]":
+        if parent_val.lower() in ["call","listexpr"]:
             return TreeNode(node.getText(), False)
 
     # Skip unwanted tokens (e.g., "\n", "{}", "[]", ",") unless explicitly preserved

@@ -1,7 +1,11 @@
 digraph {
-	ListNode_2597709123088 [label="ListNode[1 elements]"]
-	VarAssignNode_2597709418512 [label="VarAssignNode(x = [])"]
-	ListNode_2597709417168 [label="ListNode[0 elements]"]
-	VarAssignNode_2597709418512 -> ListNode_2597709417168
-	ListNode_2597709123088 -> VarAssignNode_2597709418512
+	ListNode_1757375402448 [label="ListNode[1 elements]"]
+	ListNode_1757375695904 [label="ListNode[3 elements]"]
+	NumberNode_1757375695568 [label="NumberNode(1)"]
+	ListNode_1757375695904 -> NumberNode_1757375695568
+	NumberNode_1757375402128 [label="NumberNode(1)"]
+	ListNode_1757375695904 -> NumberNode_1757375402128
+	StringNode_1757375696912 [label="StringNode(\"hello\")"]
+	ListNode_1757375695904 -> StringNode_1757375696912
+	ListNode_1757375402448 -> ListNode_1757375695904
 }
