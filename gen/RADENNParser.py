@@ -217,7 +217,7 @@ class RADENNParser ( Parser ):
                      "'for'", "'while'", "'do'", "'function'", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "'not'", "'='", 
                      "'+'", "'-'", "'*'", "'/'", "'%'", "'^'", "'=='", "'!='", 
-                     "'<'", "'>'", "'<='", "'>='", "'and'", "'or'", "','", 
+                     "'<'", "'>'", "'<='", "'>='", "'&&'", "'||'", "','", 
                      "';'", "'('", "')'", "'['", "']'", "'{'", "'}'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 

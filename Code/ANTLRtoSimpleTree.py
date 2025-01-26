@@ -5,8 +5,8 @@ from Code.RADENNParser import RADENNParser
 
 
 def build_custom_tree(node):
-    # Skip NEWLINE nodes
-    if isinstance(node, Token) and node.type == RADENNLexer.NEWLINE or node.getText()=='\n':
+
+    if isinstance(node, Token) and node.type == RADENNLexer.NEWLINE or node.getText() in "\n(){}[],":
         return
 
     if isinstance(node, RuleContext):

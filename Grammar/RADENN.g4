@@ -14,7 +14,7 @@ statement
 
 expr
     : 'var' IDENTIFIER EQ expr
-    | compExpr (('and' | 'or') compExpr)*
+    | compExpr ((AND | OR) compExpr)*
     ;
 
 compExpr
@@ -151,8 +151,8 @@ GT: '>';
 LTE: '<=';
 GTE: '>=';
 
-AND: 'and';
-OR: 'or';
+AND: '&&';
+OR: '||';
 
 COMMA: ',';
 SEMICOLON: ';';
