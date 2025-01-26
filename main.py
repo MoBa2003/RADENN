@@ -8,9 +8,8 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
-var x=2^2^2^2
-2+2+2+2
-1 and 1
+
+var x=[]
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -74,6 +73,8 @@ def bin_op_arithExpr_arithExpr(cur_childs:List[TreeNode]):
 def compExpr(node:TreeNode):
     if node.children[0].val=='@':
         return UnaryOpNode('not',compExpr(node.children[1]))
+    if len(node.children)==1:
+        return arithExpr(node.children[0])
     cur_childs=node.children.copy()
     return bin_op_arithExpr_arithExpr(cur_childs)
 
@@ -109,14 +110,50 @@ def power(node: TreeNode):
         return call(node.children[0])
     return BinOpNode(call(node.children[0]),node.children[1].val,factor(node.children[2]))
 
-    pass   
 
 
 def call(node: TreeNode):
-    return atom(node.children[0])
+    if len(node.children)==1: return atom(node.children[0])
+    node.children.pop(1)
+    node.children.pop(-1)
+    nodetocall=atom(node.children[0])
+    args=[]
+    for i in node.children[1:]:
+        args.append(expr(i))
+    return CallNode(nodetocall,args)
+    
+    
 def atom(node:TreeNode):
+    
+    if (node.children[0].lexrulename in ["INT","FLOAT"]):
+
+        return NumberNode(node.children[0].val)
+    if (node.children[0].lexrulename=="STR"):
+
+        return StringNode(node.children[0].val)
+    if (node.children[0].lexrulename=="IDENTIFIER"):
+
+        return VarAccessNode(node.children[0].val)
+    
+    if (node.children[0].val).lower()=="expr":
+        # print('s')
+        return expr(node.children[0])
+    if (node.children[0].val).lower()=="listexpr":
+        
+        return listExpr(node.children[0]) 
+    
+    
     return NumberNode(node.children[0].val)
+
+def listExpr(node:TreeNode):
+    if len(node.children)==2:
+        return ListNode([])
+    items=[]
+    for i in range(1,len(node.children)+1):
+        items.append(expr(node.children[i]))
+    return ListNode(items)
+    
 ast:ListNode=start(custom_tree_root)
-print(type(ast.element_nodes[0]))
+# print(type(ast.element_nodes[0]))
 dot = draw_ast(ast)
-dot.render("ast_output", format="png", view=True)  
+dot.render("ast_output", format="png", view=False)  
