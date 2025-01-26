@@ -1,5 +1,39 @@
 digraph {
-	ListNode_1617386687520 [label="ListNode[1 elements]"]
-	ContinueNode_1617386687184 [label="ContinueNode()"]
-	ListNode_1617386687520 -> ContinueNode_1617386687184
+	ListNode_3114663332560 [label="ListNode[3 elements]"]
+	VarAssignNode_3114663332224 [label="VarAssignNode(x = (2, ^, (2, ^, (2, ^, 2))))"]
+	BinOpNode_3114663039440 [label="BinOpNode(2, ^, (2, ^, (2, ^, 2)))"]
+	NumberNode_3114663331888 [label="NumberNode(2)"]
+	BinOpNode_3114663039440 -> NumberNode_3114663331888
+	BinOpNode_3114663040720 [label="BinOpNode(2, ^, (2, ^, 2))"]
+	NumberNode_3114663040080 [label="NumberNode(2)"]
+	BinOpNode_3114663040720 -> NumberNode_3114663040080
+	BinOpNode_3114663333232 [label="BinOpNode(2, ^, 2)"]
+	NumberNode_3114663040400 [label="NumberNode(2)"]
+	BinOpNode_3114663333232 -> NumberNode_3114663040400
+	NumberNode_3114633402384 [label="NumberNode(2)"]
+	BinOpNode_3114663333232 -> NumberNode_3114633402384
+	BinOpNode_3114663040720 -> BinOpNode_3114663333232
+	BinOpNode_3114663039440 -> BinOpNode_3114663040720
+	VarAssignNode_3114663332224 -> BinOpNode_3114663039440
+	ListNode_3114663332560 -> VarAssignNode_3114663332224
+	BinOpNode_3114663262640 [label="BinOpNode(((2, +, 2), +, 2), +, 2)"]
+	BinOpNode_3114633403296 [label="BinOpNode((2, +, 2), +, 2)"]
+	BinOpNode_3114633402992 [label="BinOpNode(2, +, 2)"]
+	NumberNode_3114633402688 [label="NumberNode(2)"]
+	BinOpNode_3114633402992 -> NumberNode_3114633402688
+	NumberNode_3114663262064 [label="NumberNode(2)"]
+	BinOpNode_3114633402992 -> NumberNode_3114663262064
+	BinOpNode_3114633403296 -> BinOpNode_3114633402992
+	NumberNode_3114633453888 [label="NumberNode(2)"]
+	BinOpNode_3114633403296 -> NumberNode_3114633453888
+	BinOpNode_3114663262640 -> BinOpNode_3114633403296
+	NumberNode_3114633454160 [label="NumberNode(2)"]
+	BinOpNode_3114663262640 -> NumberNode_3114633454160
+	ListNode_3114663332560 -> BinOpNode_3114663262640
+	BinOpNode_3114633454432 [label="BinOpNode(1, and, 1)"]
+	NumberNode_3114633264464 [label="NumberNode(1)"]
+	BinOpNode_3114633454432 -> NumberNode_3114633264464
+	NumberNode_3114633264720 [label="NumberNode(1)"]
+	BinOpNode_3114633454432 -> NumberNode_3114633264720
+	ListNode_3114663332560 -> BinOpNode_3114633454432
 }
