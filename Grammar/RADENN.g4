@@ -14,11 +14,11 @@ statement
 
 expr
     : 'var' IDENTIFIER EQ expr
-    | compExpr ((AND | OR) compExpr)*
+    | compExpr (('and' | 'or') compExpr)*
     ;
 
 compExpr
-    : 'not' compExpr
+    : '@' compExpr
     | arithExpr ((EE | NE | LT | GT | LTE | GTE) arithExpr)*
     ;
 

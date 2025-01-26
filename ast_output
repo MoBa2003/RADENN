@@ -1,0 +1,5 @@
+digraph {
+	ListNode_1617386687520 [label="ListNode[1 elements]"]
+	ContinueNode_1617386687184 [label="ContinueNode()"]
+	ListNode_1617386687520 -> ContinueNode_1617386687184
+}

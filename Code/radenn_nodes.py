@@ -386,3 +386,129 @@ def draw_ast(node):
 
     visit(node)
     return dot
+def draw_ast(node):
+    dot = Digraph()
+
+    def add_node(name, label):
+        dot.node(name, label)
+
+    def add_edge(parent, child):
+        dot.edge(parent, child)
+
+    def visit(node):
+        
+        if isinstance(node, NumberNode):
+            node_name = f"NumberNode_{id(node)}"
+            add_node(node_name, f"NumberNode({node.tok})")
+        elif isinstance(node, StringNode):
+            node_name = f"StringNode_{id(node)}"
+            add_node(node_name, f"StringNode({node.tok})")
+        elif isinstance(node, ListNode):
+            node_name = f"ListNode_{id(node)}"
+            add_node(node_name, f"ListNode[{len(node.element_nodes)} elements]")
+            for elem in node.element_nodes:
+                elem_name = visit(elem)
+                add_edge(node_name, elem_name)
+        elif isinstance(node, MatrixNode):
+            node_name = f"MatrixNode_{id(node)}"
+            add_node(node_name, f"MatrixNode[{len(node.row_nodes)} rows]")
+            for row in node.row_nodes:
+                row_name = visit(row)
+                add_edge(node_name, row_name)
+        elif isinstance(node, DatasetNode):
+            node_name = f"DatasetNode_{id(node)}"
+            add_node(node_name, f"DatasetNode(data={node.data_node}, labels={node.labels_node})")
+            add_edge(node_name, visit(node.data_node))
+            add_edge(node_name, visit(node.labels_node))
+        elif isinstance(node, OptimizerNode):
+            node_name = f"OptimizerNode_{id(node)}"
+            add_node(node_name, f"Optimizer(type={node.type_node}, lr={node.learning_rate_node})")
+            add_edge(node_name, visit(node.type_node))
+            add_edge(node_name, visit(node.learning_rate_node))
+        elif isinstance(node, InputLayerNode):
+            node_name = f"InputLayerNode_{id(node)}"
+            add_node(node_name, f"InputLayerNode(input_neurons={node.input_neurons_node}, hidden_neurons={node.hidden_neurons_node})")
+            add_edge(node_name, visit(node.input_neurons_node))
+            add_edge(node_name, visit(node.hidden_neurons_node))
+        elif isinstance(node, HiddenLayerNode):
+            node_name = f"HiddenLayerNode_{id(node)}"
+            add_node(node_name, f"HiddenLayerNode(neurons={node.neurons_node})")
+            add_edge(node_name, visit(node.neurons_node))
+        elif isinstance(node, OutputLayerNode):
+            node_name = f"OutputLayerNode_{id(node)}"
+            add_node(node_name, f"OutputLayerNode(neurons={node.neurons_node})")
+            add_edge(node_name, visit(node.neurons_node))
+        elif isinstance(node, NetworkNode):
+            node_name = f"NetworkNode_{id(node)}"
+            add_node(node_name, f"NetworkNode(input_layer={node.input_layer_node})")
+            add_edge(node_name, visit(node.input_layer_node))
+            for hidden_layer in node.hidden_layers_node:
+                add_edge(node_name, visit(hidden_layer))
+            add_edge(node_name, visit(node.output_layer_node))
+        elif isinstance(node, VarAccessNode):
+            node_name = f"VarAccessNode_{id(node)}"
+            add_node(node_name, f"VarAccessNode({node.var_name_tok})")
+        elif isinstance(node, VarAssignNode):
+            node_name = f"VarAssignNode_{id(node)}"
+            add_node(node_name, f"VarAssignNode({node.var_name_tok} = {node.value_node})")
+            add_edge(node_name, visit(node.value_node))
+        elif isinstance(node, BinOpNode):
+            node_name = f"BinOpNode_{id(node)}"
+            add_node(node_name, f"BinOpNode({node.left_node}, {node.op_tok}, {node.right_node})")
+            add_edge(node_name, visit(node.left_node))
+            add_edge(node_name, visit(node.right_node))
+        elif isinstance(node, UnaryOpNode):
+            node_name = f"UnaryOpNode_{id(node)}"
+            add_node(node_name, f"UnaryOpNode({node.op_tok}, {node.node})")
+            add_edge(node_name, visit(node.node))
+        elif isinstance(node, IfNode):
+            node_name = f"IfNode_{id(node)}"
+            add_node(node_name, f"IfNode(cases={len(node.cases)}, else_case={node.else_case})")
+            for case in node.cases:
+                add_edge(node_name, visit(case[0]))
+            if node.else_case:
+                add_edge(node_name, visit(node.else_case))
+        elif isinstance(node, ForNode):
+            node_name = f"ForNode_{id(node)}"
+            add_node(node_name, f"ForNode({node.var_name_tok}, {node.start_value_node}..{node.end_value_node})")
+            add_edge(node_name, visit(node.start_value_node))
+            add_edge(node_name, visit(node.end_value_node))
+            add_edge(node_name, visit(node.body_node))
+        elif isinstance(node, WhileNode):
+            node_name = f"WhileNode_{id(node)}"
+            add_node(node_name, f"WhileNode(condition={node.condition_node})")
+            add_edge(node_name, visit(node.condition_node))
+            add_edge(node_name, visit(node.body_node))
+        elif isinstance(node, DoWhileNode):
+            node_name = f"DoWhileNode_{id(node)}"
+            add_node(node_name, f"DoWhileNode(condition={node.condition_node})")
+            add_edge(node_name, visit(node.condition_node))
+            add_edge(node_name, visit(node.body_node))
+        elif isinstance(node, FuncDefNode):
+            node_name = f"FuncDefNode_{id(node)}"
+            add_node(node_name, f"FuncDefNode({node.var_name_tok})")
+            add_edge(node_name, visit(node.body_node))
+        elif isinstance(node, CallNode):
+            node_name = f"CallNode_{id(node)}"
+            add_node(node_name, f"CallNode({node.node_to_call})")
+            add_edge(node_name, visit(node.node_to_call))
+            for arg_node in node.arg_nodes:
+                add_edge(node_name, visit(arg_node))
+        elif isinstance(node, ReturnNode):
+            print('dbg: ',node)
+            node_name=None
+            if node!=None:node_name = f"ReturnNode_{id(node)}"
+            
+            add_node(node_name, f"ReturnNode({node.node_to_return})")
+            add_edge(node_name, visit(node.node_to_return))
+        elif isinstance(node, ContinueNode):
+            node_name = f"ContinueNode_{id(node)}"
+            add_node(node_name, f"ContinueNode()")
+        elif isinstance(node, BreakNode):
+            node_name = f"BreakNode_{id(node)}"
+            add_node(node_name, f"BreakNode()")
+
+        return node_name
+
+    visit(node)
+    return dot
