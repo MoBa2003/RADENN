@@ -8,8 +8,7 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
-var a = 1
-print(a+2)
+return
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -30,6 +29,7 @@ def statements(node:TreeNode):
     node_elements=[]
     for items in node.children:
         node_elements.append(statement(items))
+    return ListNode(node_elements)
         
 def statement(node:TreeNode):
-     
+    pass
