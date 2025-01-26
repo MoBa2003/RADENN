@@ -8,8 +8,25 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
+# Data loading
+var data = load_dataset("datasets/iris")
+var data = split(data, 0.75, "clf", true)
+var X_train = get(data, 0)
+var y_train = get(data, 1)
+var X_test = get(data, 2)
+var y_test = get(data, 3)
 
-[1,1,"hello"]
+# Network definition
+var il = inputLayer(len(get(X_train,0)), 8, "glorot_uniform", false, 0, "relu")
+var ol = outputLayer(3, "glorot_uniform", "softmax")
+var n = il+ol
+var opt = optimizer("Adam", 0.001)
+var n = compile(n, opt, "categorical_crossentropy", "clf")
+
+# Network trainning and evaluation
+var n = train(n, X_train, y_train, 5, 200, true)
+var y_pred = predict(n, X_test)
+evaluate(y_test, y_pred, "clf")
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -37,7 +54,7 @@ def statements(node:TreeNode):
     return ListNode(node_elements)
         
 def statement(node:TreeNode):
-    # print("dbg: ",node.children)
+    print("dbg: ",node.children)
     if node.children[0].is_rule==False and node.children[0].val=='return':
         
         if (len(node.children)>1):
@@ -142,8 +159,20 @@ def atom(node:TreeNode):
     if (node.children[0].val).lower()=="listexpr":
         
         return listExpr(node.children[0]) 
-    
-    
+    if (node.children[0].val).lower()=="matexpr":
+        return matExpr(node.children[0])
+    if (node.children[0].val).lower()=="datasetexpr":
+        return datasetExpr(node.children[0])
+    if (node.children[0].val).lower()=="optimizerexpr":
+        return optimizerExpr(node.children[0])
+    if (node.children[0].val).lower()=="inputlayerexpr":
+        return inputLayerExpr(node.children[0])
+    if (node.children[0].val).lower()=="hiddenlayerexpr":
+        return hiddenLayerExpr(node.children[0])
+    if (node.children[0].val).lower()=="outputlayerexpr":
+        return outputLayerExpr(node.children[0])
+    if (node.children[0].val).lower()=="networkexpr":
+        return networkExpr(node.children[0])
     return NumberNode(node.children[0].val)
 
 def listExpr(node:TreeNode):
@@ -154,8 +183,41 @@ def listExpr(node:TreeNode):
         # print(node.children[i])
         items.append(expr(node.children[i]))
     return ListNode(items)
-    
+
+def matExpr(node:TreeNode):
+    pass
+def datasetExpr(node:TreeNode):
+    pass
+def optimizerExpr(node:TreeNode):
+    return OptimizerNode(expr(node.children[1]),expr(node.children[2]))
+
+def inputLayerExpr(node:TreeNode):
+    items=[]
+    for i in range(1,7):
+        items.append(expr(node.children[i]))
+    return InputLayerNode(items[0],items[1],items[2],items[3],items[4],items[5])
+def hiddenLayerExpr(node:TreeNode):
+    items=[]
+    for i in range(1,6):
+        items.append(expr(node.children[i]))
+        # print(type(items[i-1]))
+    return HiddenLayerNode(items[0],items[1],items[2],items[3],items[4]) 
+def outputLayerExpr(node:TreeNode):
+    items=[]
+    for i in range(1,4):
+        items.append(expr(node.children[i]))
+    return OutputLayerNode(items[0],items[1],items[2])
+
+def networkExpr(node:TreeNode):
+    items=[]
+    for i in range(1,len(node.children)):
+        items.append(expr(node.children[i]))
+    # print(items)
+    return NetworkNode(items[0],items[1:-1],items[-1])
+
+
+
 ast:ListNode=start(custom_tree_root)
 # print(type(ast.element_nodes[0]))
 dot = draw_ast(ast)
-dot.render("ast_output", format="png", view=False)  
+dot.render("ast_output", format="png", view=False) 
