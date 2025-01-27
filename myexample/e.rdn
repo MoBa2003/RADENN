@@ -1,3 +1,0 @@
-var x=[[0],[1,2]]
-var vis=[0,0,0]
-print(len(vis))

@@ -2787,11 +2787,11 @@ global_symbol_table.set("run", BuiltInFunction.run)
 
 
 input_stream=InputStream("""
-var il = inputLayer(13, 8, "RandomNormal", true, 0.2, "relu")
-var hl = hiddenLayer(6, "RandomNormal", false, 0.3, "relu")
-var ol = outputLayer(1, "RandomNormal", "linear")
-var n = il + hl + ol # network variable
-print(n)
+var i = 1
+while (i <= 10) {
+print(i^2)
+var i = i+1
+}
 """)
 
 

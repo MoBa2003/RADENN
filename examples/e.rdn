@@ -1,0 +1,8 @@
+var x=[[0],[1,2]]
+var vis=[0,0,0]
+print(vis)
+update(vis,0,1)
+print(vis)
+for (i,0,len(x)-1){
+    print(get(x,i))
+}

@@ -2278,7 +2278,7 @@ class Interpreter:
         raise Exception(f"No visit_{type(node).__name__} method define")
     
     def visit_NumberNode(self, node, context):
-        return RTResult().success(Number(int(node.tok)).set_context(context))
+        return RTResult().success(Number(eval(node.tok)).set_context(context))
     
     def visit_StringNode(self, node, context):
         return RTResult().success(String(node.tok).set_context(context))
@@ -2483,6 +2483,169 @@ class Interpreter:
         if node.var_name_tok:
             context.symbol_table.set(func_name, func_value)
         return res.success(func_value)
+    def visit_ReturnNode(self, node, context):
+        res = RTResult()
+        if node.node_to_return:
+            value = res.register(self.visit(node.node_to_return, context))
+            if res.should_return():
+                return res
+        else:
+            value = Number.null
+
+        return res.success_return(value)
+    def visit_ContinueNode(self, node, context):
+        return RTResult().success_continue()
+
+    def visit_BreakNode(self, node, context):
+        return RTResult().success_break()
+    
+    def visit_MatrixNode(self, node, context):
+        res = RTResult()
+        rows = []
+        for row_node in node.row_nodes:
+            row = []
+            for element_node in row_node:
+                value = res.register(self.visit(element_node, context))
+                if res.should_return():
+                    return res
+                
+                row.append(value)
+            rows.append(row)
+        return res.success(Matrix(rows).set_context(context))
+    
+    def visit_DatasetNode(self, node, context):
+        res = RTResult()
+        data = res.register(self.visit(node.data_node, context))
+        if res.should_return():
+            return res
+        labels = res.register(self.visit(node.labels_node, context))
+        if res.should_return():
+            return res 
+        return res.success(Dataset(data, labels).set_context(context))
+    
+    def visit_OptimizerNode(self, node, context):
+        res = RTResult()
+        type_ = res.register(self.visit(node.type_node, context))
+        if res.should_return():
+            return res
+       
+        learning_rate = res.register(
+            self.visit(node.learning_rate_node, context))
+        if res.should_return():
+            return res
+       
+        return res.success(Optimizer(type_, learning_rate).set_context(context))
+    
+    def visit_InputLayerNode(self, node, context):
+        res = RTResult()
+        input_neurons = res.register(
+            self.visit(node.input_neurons_node, context))
+        if res.should_return():
+            return res
+        
+        hidden_neurons = res.register(
+            self.visit(node.hidden_neurons_node, context))
+        if res.should_return():
+            return res
+        
+        kernel_initializer = res.register(
+            self.visit(node.kernel_initializer_node, context))
+        if res.should_return():
+            return res
+        
+        batch_normalization = res.register(
+            self.visit(node.batch_normalization_node, context))
+        if res.should_return():
+            return res
+        
+
+        dropout_percentage = res.register(
+            self.visit(node.dropout_node, context))
+        if res.should_return():
+            return res
+        
+        if type(dropout_percentage.value) == int: 
+            dropout_percentage = Number(dropout_percentage.value/100)
+        
+        activation_function = res.register(
+            self.visit(node.activation_function_node, context))
+        if res.should_return():
+            return res
+        
+        return res.success(InputLayer(input_neurons, hidden_neurons, kernel_initializer, batch_normalization, dropout_percentage, activation_function).set_context(context))
+    
+    def visit_HiddenLayerNode(self, node, context):
+        res = RTResult()
+        neurons = res.register(self.visit(node.neurons_node, context))
+        if res.should_return():
+            return res
+        
+        kernel_initializer = res.register(
+            self.visit(node.kernel_initializer_node, context))
+        if res.should_return():
+            return res
+        
+        batch_normalization = res.register(
+            self.visit(node.batch_normalization_node, context))
+        if res.should_return():
+            return res
+        
+        dropout_percentage = res.register(
+            self.visit(node.dropout_node, context))
+        if res.should_return():
+            return res
+       
+        if type(dropout_percentage.value) == int:
+            dropout_percentage = Number(dropout_percentage.value/100)
+       
+
+        activation_function = res.register(
+            self.visit(node.activation_function_node, context))
+        if res.should_return():
+            return res
+        
+
+        return res.success(HiddenLayer(neurons, kernel_initializer, batch_normalization, dropout_percentage, activation_function).set_context(context)) 
+    
+    def visit_OutputLayerNode(self, node, context):
+        res = RTResult()
+        neurons = res.register(self.visit(node.neurons_node, context))
+        if res.should_return():
+            return res
+       
+        kernel_initializer = res.register(
+            self.visit(node.kernel_initializer_node, context))
+        if res.should_return():
+            return res
+
+        activation_function = res.register(
+            self.visit(node.activation_function_node, context))
+        if res.should_return():
+            return res
+      
+        return res.success(OutputLayer(neurons, kernel_initializer, activation_function).set_context(context))
+    
+    def visit_NetworkNode(self, node, context):
+        res = RTResult()
+        input_layer = res.register(self.visit(node.input_layer_node, context))
+        if res.should_return():
+            return res
+        
+
+        hidden_layers = []
+
+        for hidden_layer_node in node.hidden_layers_node:
+            hidden_layer = res.register(self.visit(hidden_layer_node, context))
+            if res.should_return():
+                return res
+            
+            hidden_layers.append(hidden_layer)
+        output_layer = res.register(
+            self.visit(node.output_layer_node, context))
+        if res.should_return():
+            return res
+    
+        return res.success(Network(input_layer, hidden_layers, output_layer).set_context(context).set_pos(node.pos_start, node.pos_end)) 
     
 global_symbol_table = SymbolTable()
 global_symbol_table.set("null", Number.null)
@@ -2522,20 +2685,29 @@ global_symbol_table.set("evaluate", BuiltInFunction.evaluate)
 
 
 input_stream=InputStream("""
-var y=[]
-function f(x){
-    if (x>0){
-        var t=f(x-1)
-        print(x)
-        
-    }
+function binarySearch(arr, target, low, high)
+{
+    if low > high
+        return -1
+
+    mid = (low + high) / 2
+
+    if get(arr, mid) == target
+        return mid
+    elif get(arr, mid) > target
+        return binarySearch(arr, target, low, mid - 1)
+    else
+        return binarySearch(arr, target, mid + 1, high)
 }
-f(4)
 
-var x=[1,2,3]
+list = [1, 3, 5, 7, 9, 11]
+target = 7
+low = 0
+high = 6
 
-print(get(x,1))
-print(y)
+result = binarySearch(list, target, low, high)
+print(result)
+
 """)
 
 
