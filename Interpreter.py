@@ -1178,49 +1178,42 @@ class BuiltInFunction(BaseFunction):
             return RTResult().success(String("function"))
         elif isinstance(value, BuiltInFunction):
             return RTResult().success(String("built-in-function"))
-        return RTResult().failure()
+        
     execute_type.arg_names = ["value"]
 
     def execute_int(self, exec_ctx):
         value = exec_ctx.symbol_table.get("value")
-        if not isinstance(value, String) and not isinstance(value, Number):
-            return RTResult().failure()
-        try:
-            int_value = int(value.value)
-            return RTResult().success(Number(int_value))
-        except Exception as e:
-            return RTResult().failure()
+        
+        
+        int_value = int(value.value)
+        return RTResult().success(Number(int_value))
+        
     execute_int.arg_names = ["value"]
 
     def execute_float(self, exec_ctx):
         value = exec_ctx.symbol_table.get("value")
-        if not isinstance(value, String) and not isinstance(value, Number):
-            return RTResult().failure()
-        try:
-            float_value = float(value.value)
-            return RTResult().success(Number(float_value))
-        except Exception as e:
-            return RTResult().failure()
+        
+        float_value = float(value.value)
+        return RTResult().success(Number(float_value))
+        
     execute_float.arg_names = ["value"]
 
     def execute_str(self, exec_ctx):
         value = exec_ctx.symbol_table.get("value")
-        try:
-            if isinstance(value, Number) or isinstance(value, String):
-                return RTResult().success(String(str(value.value)))
-            elif isinstance(value, List):
-                return RTResult().success(String(str(value.elements)))
-            elif isinstance(value, Matrix):
-                return RTResult().success(String(str(value.rows).replace("[", "{").replace("]", "}")))
-            return RTResult().failure()
-        except Exception as e:
-            return RTResult().failure()
+        
+        if isinstance(value, Number) or isinstance(value, String):
+            return RTResult().success(String(str(value.value)))
+        elif isinstance(value, List):
+            return RTResult().success(String(str(value.elements)))
+        elif isinstance(value, Matrix):
+            return RTResult().success(String(str(value.rows).replace("[", "{").replace("]", "}")))
+            
+        
     execute_str.arg_names = ["value"]
 
     def execute_list(self, exec_ctx):
         value = exec_ctx.symbol_table.get("value")
-        if not isinstance(value, String) and not isinstance(value, Matrix):
-            return RTResult().failure()
+        
         if isinstance(value, String):
             return RTResult().success(List([String(char) for char in value.value]))
         return RTResult().success(List([List(row) for row in value.rows]))
@@ -1229,26 +1222,20 @@ class BuiltInFunction(BaseFunction):
     def execute_append(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
         value = exec_ctx.symbol_table.get("value")
-        if not isinstance(list_, List) and not isinstance(list_, Matrix) and not isinstance(list_, Network):
-            return RTResult().failure()
+        
         if isinstance(list_, List):
             list_.elements.append(value)
         elif isinstance(list_, Matrix):
-            if not isinstance(value, List):
-                return RTResult().failure()
-            for element in value.elements:
-                if not isinstance(element, Number):
-                    return RTResult().failure()
+            
+            
             rows = len(list_.rows)
             if rows == 0:
                 list_.rows.append(value.elements)
             else:
-                if len(list_.rows[0]) != len(value.elements):
-                    return RTResult().failure()
+                
                 list_.rows.append(value.elements)
         else:
-            if not isinstance(value, HiddenLayer):
-                return RTResult().failure()
+            
             list_.hidden_layers.append(value)
         return RTResult().success(Number.null)
     execute_append.arg_names = ["list", "value"]
@@ -1257,30 +1244,19 @@ class BuiltInFunction(BaseFunction):
         list_ = exec_ctx.symbol_table.get("list")
         index = exec_ctx.symbol_table.get("index")
         value = exec_ctx.symbol_table.get("value")
-        if not isinstance(list_, List) and not isinstance(list_, Matrix) and not isinstance(list_, Network):
-            return RTResult().failure()
-        if not isinstance(index, Number):
-            return RTResult().failure()
-        if type(index.value) == float:
-            return RTResult().failure()
+        
         if isinstance(list_, List):
             list_.elements.insert(index.value, value)
         elif isinstance(list_, Matrix):
-            if not isinstance(value, List):
-                return RTResult().failure()
-            for element in value.elements:
-                if not isinstance(element, Number):
-                    return RTResult().failure()
+            
             rows = len(list_.rows)
             if rows == 0:
                 list_.rows.append(value.elements)
             else:
-                if len(list_.rows[0]) != len(value.elements):
-                    return RTResult().failure()
+                
                 list_.rows.insert(index.value, value.elements)
         else:
-            if not isinstance(value, HiddenLayer):
-                return RTResult().failure()
+            
             list_.hidden_layers.insert(index.value, value)
         return RTResult().success(Number.null)
     execute_insert.arg_names = ["list", "index", "value"]
@@ -1288,32 +1264,23 @@ class BuiltInFunction(BaseFunction):
     def execute_pop(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
         index = exec_ctx.symbol_table.get("index")
-        if not isinstance(list_, List) and not isinstance(list_, Matrix) and not isinstance(list_, Network):
-            return RTResult().failure()
-        if not isinstance(index, Number):
-            return RTResult().failure()
-        if type(index.value) == float:
-            return RTResult().failure()
-        try:
-            if isinstance(list_, List):
-                element = list_.elements.pop(index.value)
-            elif isinstance(list_, Matrix):
-                element = List(list_.rows.pop(index.value))
-            else:
-                element = list_.hidden_layers.pop(index.value)
-        except Exception as e:
-            return RTResult().failure()
+        
+        if isinstance(list_, List):
+            element = list_.elements.pop(index.value)
+        elif isinstance(list_, Matrix):
+            element = List(list_.rows.pop(index.value))
+        else:
+            element = list_.hidden_layers.pop(index.value)
+        
         return RTResult().success(element)
     execute_pop.arg_names = ["list", "index"]
 
     def execute_remove(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
         value = exec_ctx.symbol_table.get("value")
-        if not isinstance(list_, List) and not isinstance(list_, Matrix):
-            return RTResult().failure()
+        
         value_to_look = self.get_value(value)
-        if not value_to_look:
-            return RTResult().failure()
+        
         if isinstance(list_, List):
             found = False
             for i in range(len(list_.elements)):
@@ -1321,41 +1288,31 @@ class BuiltInFunction(BaseFunction):
                     list_.elements.pop(i)
                     found = True
                     break
-            if not found:
-                return RTResult().failure()
+            
         else:
             rows = len(list_.rows)
-            if (rows == 0) or (not isinstance(value, List)) or (len(list_.rows[0]) != len(value.elements)):
-                return RTResult().failure()
-            for element in value.elements:
-                if not isinstance(element, Number):
-                    return RTResult().failure()
+            
             found = False
             for i in range(rows):
                 if self.get_value(list_.rows[i]) == value_to_look:
                     list_.rows.pop(i)
                     found = True
                     break
-            if not found:
-                return RTResult().failure()
+            
         return RTResult().success(Number.null)
     execute_remove.arg_names = ["list", "value"]
 
     def execute_extend(self, exec_ctx):
         list1 = exec_ctx.symbol_table.get("list1")
         list2 = exec_ctx.symbol_table.get("list2")
-        if not isinstance(list1, List):
-            return RTResult().failure()
-        if not isinstance(list2, List):
-            return RTResult().failure()
+        
         list1.elements.extend(list2.elements)
         return RTResult().success(Number.null)
     execute_extend.arg_names = ["list1", "list2"]
 
     def execute_len(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
-        if not isinstance(list_, String) and not isinstance(list_, List) and not isinstance(list_, Matrix):
-            return RTResult().failure()
+        
         return RTResult().success(Number(len(self.get_value(list_))))
     execute_len.arg_names = ["list"]
 
@@ -1363,16 +1320,7 @@ class BuiltInFunction(BaseFunction):
         list_ = exec_ctx.symbol_table.get("list")
         start = exec_ctx.symbol_table.get("start")
         end = exec_ctx.symbol_table.get("end")
-        if not isinstance(list_, String) and not isinstance(list_, List) and not isinstance(list_, Matrix):
-            return RTResult().failure()
-        if not isinstance(start, Number):
-            return RTResult().failure()
-        if not isinstance(end, Number):
-            return RTResult().failure()
-        if type(start.value) == float:
-            return RTResult().failure()
-        if type(end.value) == float:
-            return RTResult().failure()
+        
         if isinstance(list_, String):
             return RTResult().success(String(list_.value[start.value: end.value+1]))
         elif isinstance(list_, List):
@@ -1383,67 +1331,40 @@ class BuiltInFunction(BaseFunction):
     def execute_get(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
         indexes = exec_ctx.symbol_table.get("indexes")
-        if not isinstance(list_, String) and not isinstance(list_, List) and not isinstance(list_, Matrix):
-            return RTResult().failure()
-        if not isinstance(indexes, Number) and not isinstance(indexes, List):
-            return RTResult().failure()
+        
         if isinstance(indexes, Number):
-            if type(indexes.value) == float:
-                return RTResult().failure()
-        else:
-            for index in indexes.elements:
-                if not isinstance(index, Number):
-                    return RTResult().failure()
-                if type(index.value) == float:
-                    return RTResult().failure()
-        try:
-            if isinstance(indexes, Number):
-                if isinstance(list_, String):
-                    return RTResult().success(String(list_.value[indexes.value]))
-                elif isinstance(list_, List):
-                    return RTResult().success(list_.elements[indexes.value])
-                return RTResult().success(List(list_.rows[indexes.value]))
+            if isinstance(list_, String):
+                return RTResult().success(String(list_.value[indexes.value]))
+            elif isinstance(list_, List):
+                return RTResult().success(list_.elements[indexes.value])
+            return RTResult().success(List(list_.rows[indexes.value]))
 
-            resulting_value = None
-            for index in self.get_value(indexes.elements):
-                if resulting_value == None:
-                    if isinstance(list_, String):
-                        resulting_value = String(list_.value[index])
-                    elif isinstance(list_, List):
-                        resulting_value = list_.elements[index]
-                    else:
-                        resulting_value = List(list_.rows[index])
+        resulting_value = None
+        for index in self.get_value(indexes.elements):
+            if resulting_value == None:
+                if isinstance(list_, String):
+                    resulting_value = String(list_.value[index])
+                elif isinstance(list_, List):
+                    resulting_value = list_.elements[index]
                 else:
-                    if isinstance(resulting_value, String):
-                        resulting_value = String(resulting_value.value[index])
-                    elif isinstance(resulting_value, List):
-                        resulting_value = resulting_value.elements[index]
-                    elif isinstance(resulting_value, Matrix):
-                        resulting_value = List(resulting_value.rows[index])
-                    else:
-                        return RTResult().failure()
-            return RTResult().success(resulting_value)
-        except Exception as e:
-            return RTResult().failure()
+                    resulting_value = List(list_.rows[index])
+            else:
+                if isinstance(resulting_value, String):
+                    resulting_value = String(resulting_value.value[index])
+                elif isinstance(resulting_value, List):
+                    resulting_value = resulting_value.elements[index]
+                elif isinstance(resulting_value, Matrix):
+                    resulting_value = List(resulting_value.rows[index])
+                
+        return RTResult().success(resulting_value)
+        
     execute_get.arg_names = ["list", "indexes"]
 
     def execute_update(self, exec_ctx):
         list_ = exec_ctx.symbol_table.get("list")
         indexes = exec_ctx.symbol_table.get("indexes")
         value = exec_ctx.symbol_table.get("value")
-        if not isinstance(list_, String) and not isinstance(list_, List) and not isinstance(list_, Matrix):
-            return RTResult().failure()
-        if not isinstance(indexes, Number) and not isinstance(indexes, List):
-            return RTResult().failure()
-        if isinstance(indexes, Number):
-            if type(indexes.value) == float:
-                return RTResult().failure()
-        else:
-            for index in indexes.elements:
-                if not isinstance(index, Number):
-                    return RTResult().failure()
-                if type(index.value) == float:
-                    return RTResult().failure()
+        
         try:
             if isinstance(indexes, Number):
                 if isinstance(list_, String):
@@ -2601,16 +2522,20 @@ global_symbol_table.set("evaluate", BuiltInFunction.evaluate)
 
 
 input_stream=InputStream("""
+var y=[]
 function f(x){
     if (x>0){
-        f(x-1)
+        var t=f(x-1)
         print(x)
+        
     }
 }
 f(4)
 
 var x=[1,2,3]
+
 print(get(x,1))
+print(y)
 """)
 
 

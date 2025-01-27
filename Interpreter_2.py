@@ -2378,7 +2378,7 @@ class Interpreter:
         raise Exception(f"No visit_{type(node).__name__} method define")
     
     def visit_NumberNode(self, node, context):
-        return RTResult().success(Number(int(node.tok)).set_context(context))
+        return RTResult().success(Number((node.tok)).set_context(context))
     
     def visit_StringNode(self, node, context):
         return RTResult().success(String(node.tok).set_context(context))
@@ -2434,7 +2434,7 @@ class Interpreter:
         res = RTResult()
         var_name = node.var_name_tok
         value = context.symbol_table.get(var_name)
-        print(node)
+        # print(node)
         value = value.copy().set_context(context)
         if var_name == "null":
             return res.success(value.set_should_print(False))
@@ -2551,7 +2551,7 @@ class Interpreter:
             elements.append(value)
         return res.success(Number.null)
     def visit_DoWhileNode(self, node, context):
-        print("dbg: ",node)
+        # print("dbg: ",node)
         res = RTResult()
         elements = []
         value = res.register(self.visit(node.body_node, context))
@@ -2787,7 +2787,11 @@ global_symbol_table.set("run", BuiltInFunction.run)
 
 
 input_stream=InputStream("""
-
+var il = inputLayer(13, 8, "RandomNormal", true, 0.2, "relu")
+var hl = hiddenLayer(6, "RandomNormal", false, 0.3, "relu")
+var ol = outputLayer(1, "RandomNormal", "linear")
+var n = il + hl + ol # network variable
+print(n)
 """)
 
 

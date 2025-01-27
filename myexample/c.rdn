@@ -1,0 +1,5 @@
+var il = inputLayer(13, 8, "RandomNormal", true, 0.2, "relu")
+var hl = hiddenLayer(6, "RandomNormal", false, 0.3, "relu")
+var ol = outputLayer(1, "RandomNormal", "linear")
+var n = il + hl + ol # network variable
+print(n)
