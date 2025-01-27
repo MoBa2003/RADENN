@@ -173,10 +173,6 @@ class IfNode:
         self.else_case = else_case
         
         
-        self.pos_start = self.cases[0][0].pos_start
-        self.pos_end = (self.else_case or self.cases[-1][0]).pos_end
-
-
 class ForNode:
     def __repr__(self):
         return f"For(var={self.var_name_tok}, start={self.start_value_node}, end={self.end_value_node}, step={self.step_value_node}, body={self.body_node})"

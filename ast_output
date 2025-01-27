@@ -1,11 +1,53 @@
 digraph {
-	ListNode_2012452392304 [label="ListNode[1 elements]"]
-	FuncDefNode_2012452391968 [label="FuncDefNode(f)"]
-	CallNode_2012452392976 [label="CallNode(print)"]
-	VarAccessNode_2012452391632 [label="VarAccessNode(print)"]
-	CallNode_2012452392976 -> VarAccessNode_2012452391632
-	VarAccessNode_2012452082448 [label="VarAccessNode(x)"]
-	CallNode_2012452392976 -> VarAccessNode_2012452082448
-	FuncDefNode_2012452391968 -> CallNode_2012452392976
-	ListNode_2012452392304 -> FuncDefNode_2012452391968
+	ListNode_2079230935696 [label="ListNode[3 elements]"]
+	IfNode_2079228793184 [label="IfNode(cases=1, else_case=Call(func=print, args=[2]))"]
+	BinOpNode_2079228791840 [label="BinOpNode(x, ==, 1)"]
+	VarAccessNode_2079228791504 [label="VarAccessNode(x)"]
+	BinOpNode_2079228791840 -> VarAccessNode_2079228791504
+	NumberNode_2079228792848 [label="NumberNode(1)"]
+	BinOpNode_2079228791840 -> NumberNode_2079228792848
+	IfNode_2079228793184 -> BinOpNode_2079228791840
+	CallNode_2079228792512 [label="CallNode(print)"]
+	VarAccessNode_2079228500304 [label="VarAccessNode(print)"]
+	CallNode_2079228792512 -> VarAccessNode_2079228500304
+	NumberNode_2079228500624 [label="NumberNode(2)"]
+	CallNode_2079228792512 -> NumberNode_2079228500624
+	IfNode_2079228793184 -> CallNode_2079228792512
+	ListNode_2079230935696 -> IfNode_2079228793184
+	IfNode_2079228502864 [label="IfNode(cases=3, else_case=[(2, +, 2)])"]
+	BinOpNode_2079228499664 [label="BinOpNode(x, >, 1)"]
+	VarAccessNode_2079203628464 [label="VarAccessNode(x)"]
+	BinOpNode_2079228499664 -> VarAccessNode_2079203628464
+	NumberNode_2079228499344 [label="NumberNode(1)"]
+	BinOpNode_2079228499664 -> NumberNode_2079228499344
+	IfNode_2079228502864 -> BinOpNode_2079228499664
+	BinOpNode_2079203629680 [label="BinOpNode(5, >, x)"]
+	NumberNode_2079203629376 [label="NumberNode(5)"]
+	BinOpNode_2079203629680 -> NumberNode_2079203629376
+	VarAccessNode_2079228706352 [label="VarAccessNode(x)"]
+	BinOpNode_2079203629680 -> VarAccessNode_2079228706352
+	IfNode_2079228502864 -> BinOpNode_2079203629680
+	BinOpNode_2079203629984 [label="BinOpNode(y, <, 6)"]
+	VarAccessNode_2079228469568 [label="VarAccessNode(y)"]
+	BinOpNode_2079203629984 -> VarAccessNode_2079228469568
+	NumberNode_2079230935120 [label="NumberNode(6)"]
+	BinOpNode_2079203629984 -> NumberNode_2079230935120
+	IfNode_2079228502864 -> BinOpNode_2079203629984
+	ListNode_2079203630288 [label="ListNode[1 elements]"]
+	BinOpNode_2079230935408 [label="BinOpNode(2, +, 2)"]
+	NumberNode_2079228469840 [label="NumberNode(2)"]
+	BinOpNode_2079230935408 -> NumberNode_2079228469840
+	NumberNode_2079228470112 [label="NumberNode(2)"]
+	BinOpNode_2079230935408 -> NumberNode_2079228470112
+	ListNode_2079203630288 -> BinOpNode_2079230935408
+	IfNode_2079228502864 -> ListNode_2079203630288
+	ListNode_2079230935696 -> IfNode_2079228502864
+	IfNode_2079228503504 [label="IfNode(cases=1, else_case=None)"]
+	BinOpNode_2079228470384 [label="BinOpNode(t, <, 100)"]
+	VarAccessNode_2079230821712 [label="VarAccessNode(t)"]
+	BinOpNode_2079228470384 -> VarAccessNode_2079230821712
+	NumberNode_2079230821968 [label="NumberNode(100)"]
+	BinOpNode_2079228470384 -> NumberNode_2079230821968
+	IfNode_2079228503504 -> BinOpNode_2079228470384
+	ListNode_2079230935696 -> IfNode_2079228503504
 }

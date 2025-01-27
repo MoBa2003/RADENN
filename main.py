@@ -8,9 +8,19 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
-function f(x,y,z)
-    print(x)
-
+if (x==1) return x else print(2)
+if (x>1){
+    x+2
+} elif (5>x){
+    print("hello")
+} elif (y<6){
+  print("iewgiw")  
+} else {
+    2+2
+}
+if (t<100){
+    print("haha")
+}
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -165,6 +175,8 @@ def atom(node:TreeNode):
         return doWhileExpr(node.children[0])
     if (node.children[0].val).lower()=="funcdef":
         return funcDef(node.children[0])
+    if (node.children[0].val).lower()=="ifexpr":
+        return ifExpr(node.children[0])
     pass    
     
 
@@ -266,6 +278,36 @@ def funcDef(node:TreeNode):
         
     return FuncDefNode(var_name_tok,arg_name_toks,body_node,should_auto_return)
 
+
+def ifExpr(node:TreeNode):
+    curr=node
+    cases=[]
+    else_case=None
+    while len(curr.children)==4: 
+        cond_expr=expr(curr.children[1])
+        body_stmt=None
+        if (curr.children[2].val).lower() =='statement':
+            body_stmt=statement(curr.children[2])
+        else:
+            body_stmt=statements(curr.children[2])
+        cases.append((cond_expr,body_stmt))
+        curr=curr.children[3]
+    if (curr.val).lower() =='elseexpr':
+        if (curr.children[1].val).lower()=='statement':
+            else_case=statement(curr.children[1])
+        else:
+            else_case=statements(curr.children[1])
+    else:
+        cond_expr=expr(curr.children[1])
+        body_stmt=None
+        if (curr.children[2].val).lower() =='statement':
+            body_stmt=statement(curr.children[2])
+        else:
+            body_stmt=statements(curr.children[2])
+        cases.append((cond_expr,body_stmt))
+    print("dbg ifexpr: ",cases,else_case)
+    return IfNode(cases,else_case)
+    
 
 ast:ListNode=start(custom_tree_root)
 # print(type(ast.element_nodes[0]))
