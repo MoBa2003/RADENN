@@ -1,21 +1,11 @@
 digraph {
-	ListNode_1950548005552 [label="ListNode[1 elements]"]
-	DoWhileNode_1950548005216 [label="DoWhileNode(condition=((x, ^, 2), >, 10))"]
-	BinOpNode_1950547695632 [label="BinOpNode((x, ^, 2), >, 10)"]
-	BinOpNode_1950548004544 [label="BinOpNode(x, ^, 2)"]
-	VarAccessNode_1950547694992 [label="VarAccessNode(x)"]
-	BinOpNode_1950548004544 -> VarAccessNode_1950547694992
-	NumberNode_1950548004208 [label="NumberNode(2)"]
-	BinOpNode_1950548004544 -> NumberNode_1950548004208
-	BinOpNode_1950547695632 -> BinOpNode_1950548004544
-	NumberNode_1950547695312 [label="NumberNode(10)"]
-	BinOpNode_1950547695632 -> NumberNode_1950547695312
-	DoWhileNode_1950548005216 -> BinOpNode_1950547695632
-	CallNode_1950548003872 [label="CallNode(print)"]
-	VarAccessNode_1950548003536 [label="VarAccessNode(print)"]
-	CallNode_1950548003872 -> VarAccessNode_1950548003536
-	StringNode_1950548004880 [label="StringNode(\"hello\")"]
-	CallNode_1950548003872 -> StringNode_1950548004880
-	DoWhileNode_1950548005216 -> CallNode_1950548003872
-	ListNode_1950548005552 -> DoWhileNode_1950548005216
+	ListNode_2012452392304 [label="ListNode[1 elements]"]
+	FuncDefNode_2012452391968 [label="FuncDefNode(f)"]
+	CallNode_2012452392976 [label="CallNode(print)"]
+	VarAccessNode_2012452391632 [label="VarAccessNode(print)"]
+	CallNode_2012452392976 -> VarAccessNode_2012452391632
+	VarAccessNode_2012452082448 [label="VarAccessNode(x)"]
+	CallNode_2012452392976 -> VarAccessNode_2012452082448
+	FuncDefNode_2012452391968 -> CallNode_2012452392976
+	ListNode_2012452392304 -> FuncDefNode_2012452391968
 }

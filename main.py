@@ -8,9 +8,9 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
-do 
-    print("hello")
- while (x^2>10)
+function f(x,y,z)
+    print(x)
+
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -163,7 +163,10 @@ def atom(node:TreeNode):
         return whileExpr(node.children[0])
     if (node.children[0].val).lower()=="dowhileexpr":
         return doWhileExpr(node.children[0])
-    return NumberNode(node.children[0].val)
+    if (node.children[0].val).lower()=="funcdef":
+        return funcDef(node.children[0])
+    pass    
+    
 
 def listExpr(node:TreeNode):
     if len(node.children)==2:
@@ -242,7 +245,26 @@ def doWhileExpr(node:TreeNode):
         body_node=statement(node.children[1])
     cond_node=expr(node.children[3])
     return DoWhileNode(body_node,cond_node)
-    
+
+def funcDef(node:TreeNode):
+    cr=1
+    var_name_tok=node.children[cr].val
+    cr+=1
+    arg_name_toks=[]
+    body_node=None
+    should_auto_return=None
+    while (node.children[cr].val).lower() not in ['statements','statement']:
+        arg_name_toks.append(node.children[cr].val)
+        cr+=1
+    if (node.children[cr].val).lower() =='statement':
+        body_node=statement(node.children[cr])
+        should_auto_return=True
+    else:
+        body_node=statements(node.children[cr])
+        should_auto_return=False
+    print("dbg funcDef: ",var_name_tok,arg_name_toks)
+        
+    return FuncDefNode(var_name_tok,arg_name_toks,body_node,should_auto_return)
 
 
 ast:ListNode=start(custom_tree_root)
