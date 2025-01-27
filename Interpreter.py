@@ -2535,7 +2535,55 @@ class Interpreter:
             elements.append(value)
 
         return res.success(Number.null)
-    
+    def visit_WhileNode(self, node, context):
+        res = RTResult()
+        elements = []
+        while True:
+            condition = res.register(self.visit(node.condition_node, context))
+            if res.should_return():
+                return res
+            if not condition.is_true():
+                break
+            value = res.register(self.visit(node.body_node, context)) 
+            if res.loop_should_continue:
+                continue
+            if res.loop_should_break:
+                break
+            elements.append(value)
+        return res.success(Number.null)
+    def visit_DoWhileNode(self, node, context):
+        print("dbg: ",node)
+        res = RTResult()
+        elements = []
+        value = res.register(self.visit(node.body_node, context))
+        if res.error and res.loop_should_continue == False and res.loop_should_break == False:
+            return res
+        elements.append(value)
+        while True:
+            condition = res.register(self.visit(node.condition_node, context))
+            if res.should_return():
+                return res
+            if not condition.is_true():
+                break
+            value = res.register(self.visit(node.body_node, context))
+            
+            if res.loop_should_continue:
+                continue
+            if res.loop_should_break:
+                break
+            elements.append(value)
+
+        return res.success(Number.null)
+    def visit_FuncDefNode(self, node, context):
+        res = RTResult()
+        func_name = node.var_name_tok
+        body_node = node.body_node
+        arg_names = [arg_name for arg_name in node.arg_name_toks]
+        func_value = Function(func_name, body_node, arg_names, node.should_auto_return).set_context(
+            context).set_should_print(False)
+        if node.var_name_tok:
+            context.symbol_table.set(func_name, func_value)
+        return res.success(func_value)
     
 global_symbol_table = SymbolTable()
 global_symbol_table.set("null", Number.null)
@@ -2576,9 +2624,16 @@ global_symbol_table.set("run", BuiltInFunction.run)
 
 
 input_stream=InputStream("""
-for (i,0,9,2){
-    print(i)
+function f(x){
+    if (x>0){
+        f(x-1)
+        print(x)
+    }
 }
+f(4)
+
+var x=[1,2,3]
+print(get(x,1))
 """)
 
 
