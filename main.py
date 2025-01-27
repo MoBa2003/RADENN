@@ -8,22 +8,7 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 from IRBuilder import start
 input_stream=InputStream("""
-var x = "global variable"
-
-function f() print(x)
-    
-function g(){
-    var x = "inner variable"
-    f()
-}
-
-function h() print(x)
-        
-f() # global variable
-g() # inner variable
-h() # global variable
-
-
+print(@(0))
 """)
 
 lexer=RADENNLexer(input_stream)

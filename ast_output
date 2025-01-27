@@ -1,47 +1,11 @@
 digraph {
-	ListNode_1544449890640 [label="ListNode[7 elements]"]
-	VarAssignNode_1544450117984 [label="VarAssignNode(x = \"global variable\")"]
-	StringNode_1544450116640 [label="StringNode(\"global variable\")"]
-	VarAssignNode_1544450117984 -> StringNode_1544450116640
-	ListNode_1544449890640 -> VarAssignNode_1544450117984
-	FuncDefNode_1544450117648 [label="FuncDefNode(f)"]
-	CallNode_1544450117312 [label="CallNode(print)"]
-	VarAccessNode_1544450116976 [label="VarAccessNode(print)"]
-	CallNode_1544450117312 -> VarAccessNode_1544450116976
-	VarAccessNode_1544449888720 [label="VarAccessNode(x)"]
-	CallNode_1544450117312 -> VarAccessNode_1544449888720
-	FuncDefNode_1544450117648 -> CallNode_1544450117312
-	ListNode_1544449890640 -> FuncDefNode_1544450117648
-	FuncDefNode_1544449889680 [label="FuncDefNode(g)"]
-	ListNode_1544450118320 [label="ListNode[2 elements]"]
-	VarAssignNode_1544449889360 [label="VarAssignNode(x = \"inner variable\")"]
-	StringNode_1544449889040 [label="StringNode(\"inner variable\")"]
-	VarAssignNode_1544449889360 -> StringNode_1544449889040
-	ListNode_1544450118320 -> VarAssignNode_1544449889360
-	CallNode_1544449888400 [label="CallNode(f)"]
-	VarAccessNode_1544449888080 [label="VarAccessNode(f)"]
-	CallNode_1544449888400 -> VarAccessNode_1544449888080
-	ListNode_1544450118320 -> CallNode_1544449888400
-	FuncDefNode_1544449889680 -> ListNode_1544450118320
-	ListNode_1544449890640 -> FuncDefNode_1544449889680
-	FuncDefNode_1544449890320 [label="FuncDefNode(h)"]
-	CallNode_1544449890000 [label="CallNode(print)"]
-	VarAccessNode_1544419449760 [label="VarAccessNode(print)"]
-	CallNode_1544449890000 -> VarAccessNode_1544419449760
-	VarAccessNode_1544419450064 [label="VarAccessNode(x)"]
-	CallNode_1544449890000 -> VarAccessNode_1544419450064
-	FuncDefNode_1544449890320 -> CallNode_1544449890000
-	ListNode_1544449890640 -> FuncDefNode_1544449890320
-	CallNode_1544419450368 [label="CallNode(f)"]
-	VarAccessNode_1544450046096 [label="VarAccessNode(f)"]
-	CallNode_1544419450368 -> VarAccessNode_1544450046096
-	ListNode_1544449890640 -> CallNode_1544419450368
-	CallNode_1544419450672 [label="CallNode(g)"]
-	VarAccessNode_1544419516464 [label="VarAccessNode(g)"]
-	CallNode_1544419450672 -> VarAccessNode_1544419516464
-	ListNode_1544449890640 -> CallNode_1544419450672
-	CallNode_1544450046384 [label="CallNode(h)"]
-	VarAccessNode_1544419516736 [label="VarAccessNode(h)"]
-	CallNode_1544450046384 -> VarAccessNode_1544419516736
-	ListNode_1544449890640 -> CallNode_1544450046384
+	ListNode_2056272943280 [label="ListNode[1 elements]"]
+	CallNode_2056272943136 [label="CallNode(print)"]
+	VarAccessNode_2056272849360 [label="VarAccessNode(print)"]
+	CallNode_2056272943136 -> VarAccessNode_2056272849360
+	UnaryOpNode_2056272942704 [label="UnaryOpNode(not, 0)"]
+	NumberNode_2056272941312 [label="NumberNode(0)"]
+	UnaryOpNode_2056272942704 -> NumberNode_2056272941312
+	CallNode_2056272943136 -> UnaryOpNode_2056272942704
+	ListNode_2056272943280 -> CallNode_2056272943136
 }
