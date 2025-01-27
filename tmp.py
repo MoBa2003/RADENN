@@ -2574,6 +2574,16 @@ class Interpreter:
             elements.append(value)
 
         return res.success(Number.null)
+    def visit_FuncDefNode(self, node, context):
+        res = RTResult()
+        func_name = node.var_name_tok
+        body_node = node.body_node
+        arg_names = [arg_name for arg_name in node.arg_name_toks]
+        func_value = Function(func_name, body_node, arg_names, node.should_auto_return).set_context(
+            context).set_should_print(False)
+        if node.var_name_tok:
+            context.symbol_table.set(func_name, func_value)
+        return res.success(func_value)
     
 global_symbol_table = SymbolTable()
 global_symbol_table.set("null", Number.null)
@@ -2614,11 +2624,13 @@ global_symbol_table.set("run", BuiltInFunction.run)
 
 
 input_stream=InputStream("""
-var x=10
-do {
-    print(x)
-    var x=x-1
-} while (x>0)
+function f(x){
+    if (x>0){
+        f(x-1)
+        print(x)
+    }
+}
+f(4)
 """)
 
 
