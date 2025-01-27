@@ -2434,7 +2434,7 @@ class Interpreter:
         res = RTResult()
         var_name = node.var_name_tok
         value = context.symbol_table.get(var_name)
-       
+        print(node)
         value = value.copy().set_context(context)
         if var_name == "null":
             return res.success(value.set_should_print(False))
@@ -2787,9 +2787,6 @@ global_symbol_table.set("run", BuiltInFunction.run)
 
 
 input_stream=InputStream("""
-# Data loading
-var data = load_dataset("datasets/bostonHousePrices")
-print(data)
 
 """)
 

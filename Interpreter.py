@@ -2105,28 +2105,7 @@ class BuiltInFunction(BaseFunction):
         return RTResult().success(List([Number(mse), Number(mae), Number(r2)]))
     execute_evaluate.arg_names = ["y_test", "y_pred", "type"]
 
-    def execute_run(self, exec_ctx):
-        global PATH
-        fn = exec_ctx.symbol_table.get("fn")
-        if not isinstance(fn, String):
-            return RTResult().failure()
-        fn = fn.value
-        if ".rdn" != fn[-4:]:
-            return RTResult().failure()
-        try:
-            with open(fn, "r") as f:
-                script = f.read()
-        except Exception as e:
-            return RTResult().failure()
-        if "/" in fn:
-            PATH = "/".join(fn.split("/")[:-1])+"/"
-        _, error = run(fn, script)
-        if error:
-            PATH = None
-            return RTResult().failure()
-        PATH = None
-        return RTResult().success(Number.null)
-    execute_run.arg_names = ["fn"]
+    
 
     def get_value(self, variable):
         if isinstance(variable, Number) or isinstance(variable, String):
@@ -2364,7 +2343,6 @@ BuiltInFunction.compile = BuiltInFunction("compile")
 BuiltInFunction.train = BuiltInFunction("train")
 BuiltInFunction.predict = BuiltInFunction("predict")
 BuiltInFunction.evaluate = BuiltInFunction("evaluate")
-BuiltInFunction.run = BuiltInFunction("run")
 
 
 
@@ -2620,7 +2598,6 @@ global_symbol_table.set("compile", BuiltInFunction.compile)
 global_symbol_table.set("train", BuiltInFunction.train)
 global_symbol_table.set("predict", BuiltInFunction.predict)
 global_symbol_table.set("evaluate", BuiltInFunction.evaluate)
-global_symbol_table.set("run", BuiltInFunction.run)
 
 
 input_stream=InputStream("""
