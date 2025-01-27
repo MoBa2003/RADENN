@@ -1,21 +1,21 @@
 digraph {
-	ListNode_2103807070560 [label="ListNode[1 elements]"]
-	WhileNode_2103807069888 [label="WhileNode(condition=(x, >, 1))"]
-	BinOpNode_2103807069216 [label="BinOpNode(x, >, 1)"]
-	VarAccessNode_2103807068880 [label="VarAccessNode(x)"]
-	BinOpNode_2103807069216 -> VarAccessNode_2103807068880
-	NumberNode_2103807070224 [label="NumberNode(1)"]
-	BinOpNode_2103807069216 -> NumberNode_2103807070224
-	WhileNode_2103807069888 -> BinOpNode_2103807069216
-	CallNode_2103807069552 [label="CallNode(print)"]
-	VarAccessNode_2103806776400 [label="VarAccessNode(print)"]
-	CallNode_2103807069552 -> VarAccessNode_2103806776400
-	BinOpNode_2103806775760 [label="BinOpNode(2, +, 2)"]
-	NumberNode_2103806776720 [label="NumberNode(2)"]
-	BinOpNode_2103806775760 -> NumberNode_2103806776720
-	NumberNode_2103806777040 [label="NumberNode(2)"]
-	BinOpNode_2103806775760 -> NumberNode_2103806777040
-	CallNode_2103807069552 -> BinOpNode_2103806775760
-	WhileNode_2103807069888 -> CallNode_2103807069552
-	ListNode_2103807070560 -> WhileNode_2103807069888
+	ListNode_1950548005552 [label="ListNode[1 elements]"]
+	DoWhileNode_1950548005216 [label="DoWhileNode(condition=((x, ^, 2), >, 10))"]
+	BinOpNode_1950547695632 [label="BinOpNode((x, ^, 2), >, 10)"]
+	BinOpNode_1950548004544 [label="BinOpNode(x, ^, 2)"]
+	VarAccessNode_1950547694992 [label="VarAccessNode(x)"]
+	BinOpNode_1950548004544 -> VarAccessNode_1950547694992
+	NumberNode_1950548004208 [label="NumberNode(2)"]
+	BinOpNode_1950548004544 -> NumberNode_1950548004208
+	BinOpNode_1950547695632 -> BinOpNode_1950548004544
+	NumberNode_1950547695312 [label="NumberNode(10)"]
+	BinOpNode_1950547695632 -> NumberNode_1950547695312
+	DoWhileNode_1950548005216 -> BinOpNode_1950547695632
+	CallNode_1950548003872 [label="CallNode(print)"]
+	VarAccessNode_1950548003536 [label="VarAccessNode(print)"]
+	CallNode_1950548003872 -> VarAccessNode_1950548003536
+	StringNode_1950548004880 [label="StringNode(\"hello\")"]
+	CallNode_1950548003872 -> StringNode_1950548004880
+	DoWhileNode_1950548005216 -> CallNode_1950548003872
+	ListNode_1950548005552 -> DoWhileNode_1950548005216
 }

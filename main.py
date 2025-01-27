@@ -8,8 +8,9 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
-while (x>1)
-    print(2+2)
+do 
+    print("hello")
+ while (x^2>10)
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -160,6 +161,8 @@ def atom(node:TreeNode):
         return forExpr(node.children[0])
     if (node.children[0].val).lower()=="whileexpr":
         return whileExpr(node.children[0])
+    if (node.children[0].val).lower()=="dowhileexpr":
+        return doWhileExpr(node.children[0])
     return NumberNode(node.children[0].val)
 
 def listExpr(node:TreeNode):
@@ -230,6 +233,18 @@ def whileExpr(node:TreeNode):
     else:
         body_node=statements(node.children[2])
     return WhileNode(cond_node,body_node)
+
+def doWhileExpr(node:TreeNode):
+    body_node=None
+    if (node.children[1].val).lower()=="statement":
+        body_node=statement(node.children[1])
+    else:
+        body_node=statement(node.children[1])
+    cond_node=expr(node.children[3])
+    return DoWhileNode(body_node,cond_node)
+    
+
+
 ast:ListNode=start(custom_tree_root)
 # print(type(ast.element_nodes[0]))
 dot = draw_ast(ast)
