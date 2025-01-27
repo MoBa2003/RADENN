@@ -8,25 +8,10 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 
 input_stream=InputStream("""
-# Data loading
-var data = load_dataset("datasets/iris")
-var data = split(data, 0.75, "clf", true)
-var X_train = get(data, 0)
-var y_train = get(data, 1)
-var X_test = get(data, 2)
-var y_test = get(data, 3)
-
-# Network definition
-var il = inputLayer(len(get(X_train,0)), 8, "glorot_uniform", false, 0, "relu")
-var ol = outputLayer(3, "glorot_uniform", "softmax")
-var n = il+ol
-var opt = optimizer("Adam", 0.001)
-var n = compile(n, opt, "categorical_crossentropy", "clf")
-
-# Network trainning and evaluation
-var n = train(n, X_train, y_train, 5, 200, true)
-var y_pred = predict(n, X_test)
-evaluate(y_test, y_pred, "clf")
+for (i,0,9){
+    var x=1
+}
+for (i,0,10,1) var y=2
 """)
 
 lexer=RADENNLexer(input_stream)
@@ -54,7 +39,7 @@ def statements(node:TreeNode):
     return ListNode(node_elements)
         
 def statement(node:TreeNode):
-    print("dbg: ",node.children)
+    print("dbg: statement",node)
     if node.children[0].is_rule==False and node.children[0].val=='return':
         
         if (len(node.children)>1):
@@ -75,7 +60,7 @@ def bin_op_compExpr_compExpr(cur_childs:List[TreeNode]):
 
 
 def expr(node:TreeNode):
-    # print(node)
+    print('dbg expr: ',node)
     if node.children[0].val=='var':
         return VarAssignNode(node.children[1].val,expr(node.children[3]))
     if len(node.children)==1:
@@ -173,6 +158,8 @@ def atom(node:TreeNode):
         return outputLayerExpr(node.children[0])
     if (node.children[0].val).lower()=="networkexpr":
         return networkExpr(node.children[0])
+    if (node.children[0].val).lower()=="forexpr":
+        return forExpr(node.children[0])
     return NumberNode(node.children[0].val)
 
 def listExpr(node:TreeNode):
@@ -215,7 +202,26 @@ def networkExpr(node:TreeNode):
     # print(items)
     return NetworkNode(items[0],items[1:-1],items[-1])
 
-
+def forExpr(node:TreeNode):
+    cr=1
+    id_tok=node.children[cr].val
+    cr+=1
+    init_val_node=expr(node.children[cr])
+    cr+=1
+    end_val_node=expr(node.children[cr])
+    cr+=1
+    step_value=None
+    if (node.children[cr].val).lower()=="expr":
+        step_value=expr(node.children[cr])
+        cr+=1
+    body_node=None
+    print(id_tok,init_val_node,end_val_node,step_value)
+    if (node.children[cr].val).lower()=="statement":
+        body_node=statement(node.children[cr])
+    else:
+        body_node=statements(node.children[cr])
+    return ForNode(id_tok,init_val_node,end_val_node,step_value,body_node)  
+    
 
 ast:ListNode=start(custom_tree_root)
 # print(type(ast.element_nodes[0]))

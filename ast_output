@@ -1,157 +1,25 @@
 digraph {
-	ListNode_2120499861152 [label="ListNode[14 elements]"]
-	VarAssignNode_2120499858800 [label="VarAssignNode(data = Call(func=load_dataset, args=[\"datasets/iris\"]))"]
-	CallNode_2120499858464 [label="CallNode(load_dataset)"]
-	VarAccessNode_2120499858128 [label="VarAccessNode(load_dataset)"]
-	CallNode_2120499858464 -> VarAccessNode_2120499858128
-	StringNode_2120499859472 [label="StringNode(\"datasets/iris\")"]
-	CallNode_2120499858464 -> StringNode_2120499859472
-	VarAssignNode_2120499858800 -> CallNode_2120499858464
-	ListNode_2120499861152 -> VarAssignNode_2120499858800
-	VarAssignNode_2120499565328 [label="VarAssignNode(data = Call(func=split, args=[data, 0.75, \"clf\", true]))"]
-	CallNode_2120499565008 [label="CallNode(split)"]
-	VarAccessNode_2120499565648 [label="VarAccessNode(split)"]
-	CallNode_2120499565008 -> VarAccessNode_2120499565648
-	VarAccessNode_2120499565968 [label="VarAccessNode(data)"]
-	CallNode_2120499565008 -> VarAccessNode_2120499565968
-	NumberNode_2120499859136 [label="NumberNode(0.75)"]
-	CallNode_2120499565008 -> NumberNode_2120499859136
-	StringNode_2120499566288 [label="StringNode(\"clf\")"]
-	CallNode_2120499565008 -> StringNode_2120499566288
-	VarAccessNode_2120468944304 [label="VarAccessNode(true)"]
-	CallNode_2120499565008 -> VarAccessNode_2120468944304
-	VarAssignNode_2120499565328 -> CallNode_2120499565008
-	ListNode_2120499861152 -> VarAssignNode_2120499565328
-	VarAssignNode_2120499567248 [label="VarAssignNode(X_train = Call(func=get, args=[data, 0]))"]
-	CallNode_2120499566928 [label="CallNode(get)"]
-	VarAccessNode_2120468944608 [label="VarAccessNode(get)"]
-	CallNode_2120499566928 -> VarAccessNode_2120468944608
-	VarAccessNode_2120499787920 [label="VarAccessNode(data)"]
-	CallNode_2120499566928 -> VarAccessNode_2120499787920
-	NumberNode_2120499566608 [label="NumberNode(0)"]
-	CallNode_2120499566928 -> NumberNode_2120499566608
-	VarAssignNode_2120499567248 -> CallNode_2120499566928
-	ListNode_2120499861152 -> VarAssignNode_2120499567248
-	VarAssignNode_2120468945216 [label="VarAssignNode(y_train = Call(func=get, args=[data, 1]))"]
-	CallNode_2120468944912 [label="CallNode(get)"]
-	VarAccessNode_2120499535920 [label="VarAccessNode(get)"]
-	CallNode_2120468944912 -> VarAccessNode_2120499535920
-	VarAccessNode_2120499536192 [label="VarAccessNode(data)"]
-	CallNode_2120468944912 -> VarAccessNode_2120499536192
-	NumberNode_2120499567568 [label="NumberNode(1)"]
-	CallNode_2120468944912 -> NumberNode_2120499567568
-	VarAssignNode_2120468945216 -> CallNode_2120468944912
-	ListNode_2120499861152 -> VarAssignNode_2120468945216
-	VarAssignNode_2120468946128 [label="VarAssignNode(X_test = Call(func=get, args=[data, 2]))"]
-	CallNode_2120468945824 [label="CallNode(get)"]
-	VarAccessNode_2120468806224 [label="VarAccessNode(get)"]
-	CallNode_2120468945824 -> VarAccessNode_2120468806224
-	VarAccessNode_2120468806480 [label="VarAccessNode(data)"]
-	CallNode_2120468945824 -> VarAccessNode_2120468806480
-	NumberNode_2120468945520 [label="NumberNode(2)"]
-	CallNode_2120468945824 -> NumberNode_2120468945520
-	VarAssignNode_2120468946128 -> CallNode_2120468945824
-	ListNode_2120499861152 -> VarAssignNode_2120468946128
-	VarAssignNode_2120499788496 [label="VarAssignNode(y_test = Call(func=get, args=[data, 3]))"]
-	CallNode_2120499788208 [label="CallNode(get)"]
-	VarAccessNode_2120499602896 [label="VarAccessNode(get)"]
-	CallNode_2120499788208 -> VarAccessNode_2120499602896
-	VarAccessNode_2120499602416 [label="VarAccessNode(data)"]
-	CallNode_2120499788208 -> VarAccessNode_2120499602416
-	NumberNode_2120468946432 [label="NumberNode(3)"]
-	CallNode_2120499788208 -> NumberNode_2120468946432
-	VarAssignNode_2120499788496 -> CallNode_2120499788208
-	ListNode_2120499861152 -> VarAssignNode_2120499788496
-	VarAssignNode_2120499537552 [label="VarAssignNode(il = InputLayer(input_neurons=Call(func=len, args=[Call(func=get, args=[X_train, 0])]), hidden_neurons=8, kernel_initializer=\"glorot_uniform\", batch_normalization=false, dropout=0, activation_function=\"relu\"))"]
-	InputLayerNode_2120499859808 [label="InputLayerNode(input_neurons=Call(func=len, args=[Call(func=get, args=[X_train, 0])]), hidden_neurons=8)"]
-	CallNode_2120499536736 [label="CallNode(len)"]
-	VarAccessNode_2120500031600 [label="VarAccessNode(len)"]
-	CallNode_2120499536736 -> VarAccessNode_2120500031600
-	CallNode_2120499536464 [label="CallNode(get)"]
-	VarAccessNode_2120500031824 [label="VarAccessNode(get)"]
-	CallNode_2120499536464 -> VarAccessNode_2120500031824
-	VarAccessNode_2120500241008 [label="VarAccessNode(X_train)"]
-	CallNode_2120499536464 -> VarAccessNode_2120500241008
-	NumberNode_2120499788784 [label="NumberNode(0)"]
-	CallNode_2120499536464 -> NumberNode_2120499788784
-	CallNode_2120499536736 -> CallNode_2120499536464
-	InputLayerNode_2120499859808 -> CallNode_2120499536736
-	NumberNode_2120499537008 [label="NumberNode(8)"]
-	InputLayerNode_2120499859808 -> NumberNode_2120499537008
-	VarAssignNode_2120499537552 -> InputLayerNode_2120499859808
-	ListNode_2120499861152 -> VarAssignNode_2120499537552
-	VarAssignNode_2120499537824 [label="VarAssignNode(ol = OutputLayer(neurons=3, kernel_initializer=\"glorot_uniform\", activation_function=\"softmax\"))"]
-	OutputLayerNode_2120499860144 [label="OutputLayerNode(neurons=3)"]
-	NumberNode_2120468806736 [label="NumberNode(3)"]
-	OutputLayerNode_2120499860144 -> NumberNode_2120468806736
-	VarAssignNode_2120499537824 -> OutputLayerNode_2120499860144
-	ListNode_2120499861152 -> VarAssignNode_2120499537824
-	VarAssignNode_2120468806992 [label="VarAssignNode(n = (il, +, ol))"]
-	BinOpNode_2120499860480 [label="BinOpNode(il, +, ol)"]
-	VarAccessNode_2120468213456 [label="VarAccessNode(il)"]
-	BinOpNode_2120499860480 -> VarAccessNode_2120468213456
-	VarAccessNode_2120468297904 [label="VarAccessNode(ol)"]
-	BinOpNode_2120499860480 -> VarAccessNode_2120468297904
-	VarAssignNode_2120468806992 -> BinOpNode_2120499860480
-	ListNode_2120499861152 -> VarAssignNode_2120468806992
-	VarAssignNode_2120501936208 [label="VarAssignNode(opt = Optimizer(type=\"Adam\", learning_rate=0.001))"]
-	OptimizerNode_2120499860816 [label="Optimizer(type=\"Adam\", lr=0.001)"]
-	StringNode_2120499538096 [label="StringNode(\"Adam\")"]
-	OptimizerNode_2120499860816 -> StringNode_2120499538096
-	NumberNode_2120468807248 [label="NumberNode(0.001)"]
-	OptimizerNode_2120499860816 -> NumberNode_2120468807248
-	VarAssignNode_2120501936208 -> OptimizerNode_2120499860816
-	ListNode_2120499861152 -> VarAssignNode_2120501936208
-	VarAssignNode_2120499603376 [label="VarAssignNode(n = Call(func=compile, args=[n, opt, \"categorical_crossentropy\", \"clf\"]))"]
-	CallNode_2120501936720 [label="CallNode(compile)"]
-	VarAccessNode_2120500249360 [label="VarAccessNode(compile)"]
-	CallNode_2120501936720 -> VarAccessNode_2120500249360
-	VarAccessNode_2120500343216 [label="VarAccessNode(n)"]
-	CallNode_2120501936720 -> VarAccessNode_2120500343216
-	VarAccessNode_2120500343376 [label="VarAccessNode(opt)"]
-	CallNode_2120501936720 -> VarAccessNode_2120500343376
-	StringNode_2120499538368 [label="StringNode(\"categorical_crossentropy\")"]
-	CallNode_2120501936720 -> StringNode_2120499538368
-	StringNode_2120501936464 [label="StringNode(\"clf\")"]
-	CallNode_2120501936720 -> StringNode_2120501936464
-	VarAssignNode_2120499603376 -> CallNode_2120501936720
-	ListNode_2120499861152 -> VarAssignNode_2120499603376
-	VarAssignNode_2120499604336 [label="VarAssignNode(n = Call(func=train, args=[n, X_train, y_train, 5, 200, true]))"]
-	CallNode_2120501936976 [label="CallNode(train)"]
-	VarAccessNode_2120499621920 [label="VarAccessNode(train)"]
-	CallNode_2120501936976 -> VarAccessNode_2120499621920
-	VarAccessNode_2120501731024 [label="VarAccessNode(n)"]
-	CallNode_2120501936976 -> VarAccessNode_2120501731024
-	VarAccessNode_2120501921488 [label="VarAccessNode(X_train)"]
-	CallNode_2120501936976 -> VarAccessNode_2120501921488
-	VarAccessNode_2120501848432 [label="VarAccessNode(y_train)"]
-	CallNode_2120501936976 -> VarAccessNode_2120501848432
-	NumberNode_2120499603856 [label="NumberNode(5)"]
-	CallNode_2120501936976 -> NumberNode_2120499603856
-	NumberNode_2120499604096 [label="NumberNode(200)"]
-	CallNode_2120501936976 -> NumberNode_2120499604096
-	VarAccessNode_2120501842608 [label="VarAccessNode(true)"]
-	CallNode_2120501936976 -> VarAccessNode_2120501842608
-	VarAssignNode_2120499604336 -> CallNode_2120501936976
-	ListNode_2120499861152 -> VarAssignNode_2120499604336
-	VarAssignNode_2120500032048 [label="VarAssignNode(y_pred = Call(func=predict, args=[n, X_test]))"]
-	CallNode_2120499604816 [label="CallNode(predict)"]
-	VarAccessNode_2120501658736 [label="VarAccessNode(predict)"]
-	CallNode_2120499604816 -> VarAccessNode_2120501658736
-	VarAccessNode_2120501658544 [label="VarAccessNode(n)"]
-	CallNode_2120499604816 -> VarAccessNode_2120501658544
-	VarAccessNode_2120500525680 [label="VarAccessNode(X_test)"]
-	CallNode_2120499604816 -> VarAccessNode_2120500525680
-	VarAssignNode_2120500032048 -> CallNode_2120499604816
-	ListNode_2120499861152 -> VarAssignNode_2120500032048
-	CallNode_2120499605296 [label="CallNode(evaluate)"]
-	VarAccessNode_2120500519360 [label="VarAccessNode(evaluate)"]
-	CallNode_2120499605296 -> VarAccessNode_2120500519360
-	VarAccessNode_2120500524240 [label="VarAccessNode(y_test)"]
-	CallNode_2120499605296 -> VarAccessNode_2120500524240
-	VarAccessNode_2120500525040 [label="VarAccessNode(y_pred)"]
-	CallNode_2120499605296 -> VarAccessNode_2120500525040
-	StringNode_2120501937232 [label="StringNode(\"clf\")"]
-	CallNode_2120499605296 -> StringNode_2120501937232
-	ListNode_2120499861152 -> CallNode_2120499605296
+	ListNode_2217849754064 [label="ListNode[2 elements]"]
+	ForNode_2217850047856 [label="ForNode(i, 0..9)"]
+	NumberNode_2217850047184 [label="NumberNode(0)"]
+	ForNode_2217850047856 -> NumberNode_2217850047184
+	NumberNode_2217849754384 [label="NumberNode(9)"]
+	ForNode_2217850047856 -> NumberNode_2217849754384
+	ListNode_2217850047520 [label="ListNode[1 elements]"]
+	VarAssignNode_2217850048528 [label="VarAssignNode(x = 1)"]
+	NumberNode_2217849754704 [label="NumberNode(1)"]
+	VarAssignNode_2217850048528 -> NumberNode_2217849754704
+	ListNode_2217850047520 -> VarAssignNode_2217850048528
+	ForNode_2217850047856 -> ListNode_2217850047520
+	ListNode_2217849754064 -> ForNode_2217850047856
+	ForNode_2217849753744 [label="ForNode(i, 0..10)"]
+	NumberNode_2217823589808 [label="NumberNode(0)"]
+	ForNode_2217849753744 -> NumberNode_2217823589808
+	NumberNode_2217823590112 [label="NumberNode(10)"]
+	ForNode_2217849753744 -> NumberNode_2217823590112
+	VarAssignNode_2217849755024 [label="VarAssignNode(y = 2)"]
+	NumberNode_2217849724976 [label="NumberNode(2)"]
+	VarAssignNode_2217849755024 -> NumberNode_2217849724976
+	ForNode_2217849753744 -> VarAssignNode_2217849755024
+	ListNode_2217849754064 -> ForNode_2217849753744
 }
