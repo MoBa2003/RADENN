@@ -171,8 +171,9 @@ class IfNode:
     def __init__(self, cases, else_case):
         self.cases = cases
         self.else_case = else_case
-        
-        
+   
+
+
 class ForNode:
     def __repr__(self):
         return f"For(var={self.var_name_tok}, start={self.start_value_node}, end={self.end_value_node}, step={self.step_value_node}, body={self.body_node})"
@@ -336,11 +337,15 @@ def draw_ast(node):
             add_edge(node_name, visit(node.node))
         elif isinstance(node, IfNode):
             node_name = f"IfNode_{id(node)}"
-            add_node(node_name, f"IfNode(cases={len(node.cases)}, else_case={node.else_case})")
-            for case in node.cases:
-                add_edge(node_name, visit(case[0]))
+            add_node(node_name, f"IfNode(cases={len(node.cases)}, else_case={node.else_case is not None})")
+            for condition_node, body_node in node.cases:
+                condition_name = visit(condition_node)
+                body_name = visit(body_node)
+                add_edge(node_name, condition_name)  # Link condition to the IfNode
+                add_edge(condition_name, body_name)  # Link body to the condition
             if node.else_case:
-                add_edge(node_name, visit(node.else_case))
+                else_body_name = visit(node.else_case)
+                add_edge(node_name, else_body_name) 
         elif isinstance(node, ForNode):
             node_name = f"ForNode_{id(node)}"
             add_node(node_name, f"ForNode({node.var_name_tok}, {node.start_value_node}..{node.end_value_node})")
