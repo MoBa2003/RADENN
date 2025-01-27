@@ -2535,7 +2535,45 @@ class Interpreter:
             elements.append(value)
 
         return res.success(Number.null)
-    
+    def visit_WhileNode(self, node, context):
+        res = RTResult()
+        elements = []
+        while True:
+            condition = res.register(self.visit(node.condition_node, context))
+            if res.should_return():
+                return res
+            if not condition.is_true():
+                break
+            value = res.register(self.visit(node.body_node, context)) 
+            if res.loop_should_continue:
+                continue
+            if res.loop_should_break:
+                break
+            elements.append(value)
+        return res.success(Number.null)
+    def visit_DoWhileNode(self, node, context):
+        print("dbg: ",node)
+        res = RTResult()
+        elements = []
+        value = res.register(self.visit(node.body_node, context))
+        if res.error and res.loop_should_continue == False and res.loop_should_break == False:
+            return res
+        elements.append(value)
+        while True:
+            condition = res.register(self.visit(node.condition_node, context))
+            if res.should_return():
+                return res
+            if not condition.is_true():
+                break
+            value = res.register(self.visit(node.body_node, context))
+            
+            if res.loop_should_continue:
+                continue
+            if res.loop_should_break:
+                break
+            elements.append(value)
+
+        return res.success(Number.null)
     
 global_symbol_table = SymbolTable()
 global_symbol_table.set("null", Number.null)
@@ -2576,9 +2614,11 @@ global_symbol_table.set("run", BuiltInFunction.run)
 
 
 input_stream=InputStream("""
-for (i,0,9,2){
-    print(i)
-}
+var x=10
+do {
+    print(x)
+    var x=x-1
+} while (x>0)
 """)
 
 

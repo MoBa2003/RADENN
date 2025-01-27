@@ -1,11 +1,31 @@
 digraph {
-	ListNode_2056272943280 [label="ListNode[1 elements]"]
-	CallNode_2056272943136 [label="CallNode(print)"]
-	VarAccessNode_2056272849360 [label="VarAccessNode(print)"]
-	CallNode_2056272943136 -> VarAccessNode_2056272849360
-	UnaryOpNode_2056272942704 [label="UnaryOpNode(not, 0)"]
-	NumberNode_2056272941312 [label="NumberNode(0)"]
-	UnaryOpNode_2056272942704 -> NumberNode_2056272941312
-	CallNode_2056272943136 -> UnaryOpNode_2056272942704
-	ListNode_2056272943280 -> CallNode_2056272943136
+	ListNode_2486063600496 [label="ListNode[2 elements]"]
+	VarAssignNode_2486063600160 [label="VarAssignNode(x = 10)"]
+	NumberNode_2486063600304 [label="NumberNode(10)"]
+	VarAssignNode_2486063600160 -> NumberNode_2486063600304
+	ListNode_2486063600496 -> VarAssignNode_2486063600160
+	DoWhileNode_2486063600880 [label="DoWhileNode(condition=(x, >, 0))"]
+	BinOpNode_2486063602944 [label="BinOpNode(x, >, 0)"]
+	VarAccessNode_2486063600016 [label="VarAccessNode(x)"]
+	BinOpNode_2486063602944 -> VarAccessNode_2486063600016
+	NumberNode_2486063601120 [label="NumberNode(0)"]
+	BinOpNode_2486063602944 -> NumberNode_2486063601120
+	DoWhileNode_2486063600880 -> BinOpNode_2486063602944
+	ListNode_2486063601024 [label="ListNode[2 elements]"]
+	CallNode_2486063498576 [label="CallNode(print)"]
+	VarAccessNode_2486063489280 [label="VarAccessNode(print)"]
+	CallNode_2486063498576 -> VarAccessNode_2486063489280
+	VarAccessNode_2486063497904 [label="VarAccessNode(x)"]
+	CallNode_2486063498576 -> VarAccessNode_2486063497904
+	ListNode_2486063601024 -> CallNode_2486063498576
+	VarAssignNode_2486063601168 [label="VarAssignNode(x = (x, -, 1))"]
+	BinOpNode_2486063603232 [label="BinOpNode(x, -, 1)"]
+	VarAccessNode_2486063602080 [label="VarAccessNode(x)"]
+	BinOpNode_2486063603232 -> VarAccessNode_2486063602080
+	NumberNode_2486063599872 [label="NumberNode(1)"]
+	BinOpNode_2486063603232 -> NumberNode_2486063599872
+	VarAssignNode_2486063601168 -> BinOpNode_2486063603232
+	ListNode_2486063601024 -> VarAssignNode_2486063601168
+	DoWhileNode_2486063600880 -> ListNode_2486063601024
+	ListNode_2486063600496 -> DoWhileNode_2486063600880
 }

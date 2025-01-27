@@ -8,7 +8,11 @@ from Code.ConvertToGraphviz import *
 from Code.radenn_nodes import *
 from IRBuilder import start
 input_stream=InputStream("""
-print(@(0))
+var x=10
+do {
+    print(x)
+    var x=x-1
+} while (x>0)
 """)
 
 lexer=RADENNLexer(input_stream)

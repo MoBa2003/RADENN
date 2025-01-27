@@ -241,7 +241,7 @@ def doWhileExpr(node:TreeNode):
     if (node.children[1].val).lower()=="statement":
         body_node=statement(node.children[1])
     else:
-        body_node=statement(node.children[1])
+        body_node=statements(node.children[1])
     cond_node=expr(node.children[3])
     return DoWhileNode(body_node,cond_node)
 
