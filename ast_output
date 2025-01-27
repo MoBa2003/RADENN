@@ -1,25 +1,21 @@
 digraph {
-	ListNode_2217849754064 [label="ListNode[2 elements]"]
-	ForNode_2217850047856 [label="ForNode(i, 0..9)"]
-	NumberNode_2217850047184 [label="NumberNode(0)"]
-	ForNode_2217850047856 -> NumberNode_2217850047184
-	NumberNode_2217849754384 [label="NumberNode(9)"]
-	ForNode_2217850047856 -> NumberNode_2217849754384
-	ListNode_2217850047520 [label="ListNode[1 elements]"]
-	VarAssignNode_2217850048528 [label="VarAssignNode(x = 1)"]
-	NumberNode_2217849754704 [label="NumberNode(1)"]
-	VarAssignNode_2217850048528 -> NumberNode_2217849754704
-	ListNode_2217850047520 -> VarAssignNode_2217850048528
-	ForNode_2217850047856 -> ListNode_2217850047520
-	ListNode_2217849754064 -> ForNode_2217850047856
-	ForNode_2217849753744 [label="ForNode(i, 0..10)"]
-	NumberNode_2217823589808 [label="NumberNode(0)"]
-	ForNode_2217849753744 -> NumberNode_2217823589808
-	NumberNode_2217823590112 [label="NumberNode(10)"]
-	ForNode_2217849753744 -> NumberNode_2217823590112
-	VarAssignNode_2217849755024 [label="VarAssignNode(y = 2)"]
-	NumberNode_2217849724976 [label="NumberNode(2)"]
-	VarAssignNode_2217849755024 -> NumberNode_2217849724976
-	ForNode_2217849753744 -> VarAssignNode_2217849755024
-	ListNode_2217849754064 -> ForNode_2217849753744
+	ListNode_2103807070560 [label="ListNode[1 elements]"]
+	WhileNode_2103807069888 [label="WhileNode(condition=(x, >, 1))"]
+	BinOpNode_2103807069216 [label="BinOpNode(x, >, 1)"]
+	VarAccessNode_2103807068880 [label="VarAccessNode(x)"]
+	BinOpNode_2103807069216 -> VarAccessNode_2103807068880
+	NumberNode_2103807070224 [label="NumberNode(1)"]
+	BinOpNode_2103807069216 -> NumberNode_2103807070224
+	WhileNode_2103807069888 -> BinOpNode_2103807069216
+	CallNode_2103807069552 [label="CallNode(print)"]
+	VarAccessNode_2103806776400 [label="VarAccessNode(print)"]
+	CallNode_2103807069552 -> VarAccessNode_2103806776400
+	BinOpNode_2103806775760 [label="BinOpNode(2, +, 2)"]
+	NumberNode_2103806776720 [label="NumberNode(2)"]
+	BinOpNode_2103806775760 -> NumberNode_2103806776720
+	NumberNode_2103806777040 [label="NumberNode(2)"]
+	BinOpNode_2103806775760 -> NumberNode_2103806777040
+	CallNode_2103807069552 -> BinOpNode_2103806775760
+	WhileNode_2103807069888 -> CallNode_2103807069552
+	ListNode_2103807070560 -> WhileNode_2103807069888
 }
